@@ -20,15 +20,36 @@ let contadorComprCuotif = 0;
 
 let contenedor = "";
 
+class Register{
+    constructor(nombre, apellido, usuario, nacimiento, contraseña){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.nacimiento = nacimiento;
+        this.contraseña = contraseña;
+    }
+}
+const usuariosRegistrados = [];
+
+usuariosRegistrados.push(new Register("nombre1","apellido1","usuario1","xx/xx/xxxx","contraseña1"));
+usuariosRegistrados.push(new Register("nombre2","apellido2","usuario2","11/11/1111","contraseña2"));
+usuariosRegistrados.push(new Register("Lucas","Romero","LJG_Romero","01/03/1990","acft"));
+usuariosRegistrados.push(new Register("nombre4","apellido4","usuario4","22/22/2222","contraseña4"));
+
 let card = document.getElementById("btn");
 card.addEventListener ("click", crearCard);
 function crearCard() {
     //console.log("Prueba")
+    let name = document.getElementById("name").value;
+    let lastname = document.getElementById("lastname").value;
+    let lastNumbers = document.getElementById("lastNumbers").value;
+    //let nodo = document.getElementsByClassName("cards__Basket");
+
     contenedor = document.getElementById("main");
     contenedor.innerHTML = `<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;">
                                 <h3 style="height: 15%;">Visa</h3>
-                                <p style="height: 15%;">Lucas Romero</p>
-                                <p style="height: 15%;">xxxx xxxx xxxx xxxx</p>
+                                <p style="height: 15%;">${name} + ${lastname}</p>
+                                <p style="height: 15%;">xxxx xxxx xxxx ${lastNumbers}</p>
                                 <div style="height: 15%; display: flex; flex-direction: row; justify-content: space-evenly;">
                                     <p>xx/xx</p>
                                     <p>xxx</p>
