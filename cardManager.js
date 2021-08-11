@@ -18,8 +18,6 @@ let acumuladoCuotas = 0;
 
 let contadorComprCuotif = 0;
 
-let contenedor = "";
-
 class Cards{
     constructor(nombre, apellido, lastNumbers, cardExp){
         this.nombre = nombre;
@@ -34,7 +32,7 @@ const cardsRegistration = [];
 let card = document.getElementById("btn");
 card.addEventListener ("click", crearCard);
 function crearCard() {
-    //console.log("Prueba")
+    
     let name = document.getElementById("name").value;
     let lastname = document.getElementById("lastname").value;
     let lastNumbers = document.getElementById("lastNumbers").value;
@@ -42,29 +40,64 @@ function crearCard() {
 
     cardsRegistration.push(new Cards(name,lastname,lastNumbers));
 
-    contenedor = document.getElementById("cards__Basket");
-    contenedor.innerHTML = `<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;">
-                                <h3 style="height: 15%;">Visa</h3>
-                                <p style="height: 15%;">${name} ${lastname}</p>
-                                <p style="height: 15%;">xxxx xxxx xxxx ${lastNumbers}</p>
-                                <div style="height: 15%; display: flex; flex-direction: row; justify-content: space-evenly;">
-                                    <p>xx/xx</p>
-                                    <p>xxx</p>
+    console.log(cardsRegistration) //Chequeo array
+
+    document.getElementById("cards__Basket").innerHTML = "";
+    for (const cards of cardsRegistration) {
+
+        let nodo = document.getElementById("cards__Basket");
+        let elemento = document.createElement("div");
+    
+        elemento.style.height = "200px";
+        elemento.style.width = "350px";
+        elemento.style.backgroundColor = "lightsalmon";
+        //elemento.style.boxShadow = "0px 1px 5px 0px tomato;";
+        elemento.style.boxShadow = "0px 1px 5px tomato";
+        elemento.style.borderRadius = "10px";
+
+        elemento.innerHTML = `  <h3>Visa</h3>
+                                <p>${cards.nombre} ${cards.apellido}</p>
+                                <p>xxxx xxxx xxxx ${cards.lastNumbers}</p>
+                                <div style=" display: flex; flex-direction: row; justify-content: space-evenly;">
+                                <p>xx/xx</p>
+                                <p>xxx</p>
                                 </div>
 
-                            </div>`;
-    
-    //document.main.appendChild(contenedor);
+                            `;
+        nodo.appendChild(elemento);
+        
+    }
 
+
+    //elemento.setAttribute("style","height: 200px;");
+    //elemento.setAttribute("style","width: 350px;");
+    //elemento.setAttribute("style","background-color: lightsalmon;");
+    //elemento.setAttribute("style","box-shadow: 0px 1px 5px tomato;");
+    //elemento.setAttribute("style","border-radius: 10px;");
+
+    //setAttribute solo inserta un atributo y/o modifica existene.
+    
+
+    
+
+                            //<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;"></div>//
+    
+
+
+    document.getElementById("cardSelector").innerHTML = "";
     for (const cards of cardsRegistration) {
-        document.getElementById("cardSelector").innerHTML = `
-            <option>${cards.nombre} ${cards.apellido} terminación ${cards.lastNumbers}</option>;
+
+        let nodo2 = document.getElementById("cardSelector");
+        let elemento2 = document.createElement("option");
+        elemento2.innerHTML = `
+            ${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}
         `
+        nodo2.appendChild(elemento2);
         
     }
     
 }
-console.log(cardsRegistration)
+
 
 
 
