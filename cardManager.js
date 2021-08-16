@@ -26,24 +26,24 @@ class Cards{
         this.cardExp = cardExp;
     }
 }
-const cardsRegistration = [];
+const cardsContainer = [];
 
 
 let card = document.getElementById("btn");
-card.addEventListener ("click", crearCard);
-function crearCard() {
+card.addEventListener ("click", cardsFactory);
+function cardsFactory() {
     
     let name = document.getElementById("name").value;
     let lastname = document.getElementById("lastname").value;
     let lastNumbers = document.getElementById("lastNumbers").value;
     //let nodo = document.getElementsByClassName("cards__Basket");
 
-    cardsRegistration.push(new Cards(name,lastname,lastNumbers));
+    cardsContainer.push(new Cards(name,lastname,lastNumbers));
 
-    console.log(cardsRegistration) //Chequeo array
+    console.log(cardsContainer) //Chequeo array
 
     document.getElementById("cards__Basket").innerHTML = "";
-    for (const cards of cardsRegistration) {
+    for (const cards of cardsContainer) {
 
         let nodo = document.getElementById("cards__Basket");
         let elemento = document.createElement("div");
@@ -51,7 +51,6 @@ function crearCard() {
         elemento.style.height = "200px";
         elemento.style.width = "350px";
         elemento.style.backgroundColor = "lightsalmon";
-        //elemento.style.boxShadow = "0px 1px 5px 0px tomato;";
         elemento.style.boxShadow = "0px 1px 5px tomato";
         elemento.style.borderRadius = "10px";
 
@@ -75,17 +74,18 @@ function crearCard() {
     //elemento.setAttribute("style","box-shadow: 0px 1px 5px tomato;");
     //elemento.setAttribute("style","border-radius: 10px;");
 
-    //setAttribute solo inserta un atributo y/o modifica existene.
+    //** setAttribute solo inserta un atributo y/o modifica existene.
     
 
     
 
-                            //<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;"></div>//
+    //** Modelo card
+    //<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;"></div>//
     
 
 
     document.getElementById("cardSelector").innerHTML = "";
-    for (const cards of cardsRegistration) {
+    for (const cards of cardsContainer) {
 
         let nodo2 = document.getElementById("cardSelector");
         let elemento2 = document.createElement("option");
@@ -100,56 +100,56 @@ function crearCard() {
 
 
 
+// ** Plantilla del algoritmo a refactorizar 
+
+// const cuota = (valorCompra, nCuotas) => {return valorCompra / nCuotas};
+// const impSellos = (valorCompra) => {return valorCompra * 0.015};
+// const sumatoriaTotal = (acumuladoCuotas, acumuladoImp) => {return acumuladoCuotas + acumuladoImp};
 
 
-const cuota = (valorCompra, nCuotas) => {return valorCompra / nCuotas};
-const impSellos = (valorCompra) => {return valorCompra * 0.015};
-const sumatoriaTotal = (acumuladoCuotas, acumuladoImp) => {return acumuladoCuotas + acumuladoImp};
+// alert("Bienvenido a la web app para gestionar sus compras del mes con su tarjeta de crédito.");
+// alert("Le recomendamos que tenga a mano su resumen anterior.");
+// salida = prompt("Desea continuar y/n ?");
+// while (salida != "n" && salida != "N"){
+
+//     region = prompt("Su lugar de residencia es la Ciudad Autónoma de Buenos Aires (CABA) o Córdoba? y/n");
+//     mes = prompt("Porfavor, ingrese el mes en curso.");
+//     fechaCierre = prompt("Porfavor, ingrese la fecha de cierre de resumen en formato dd/mm/aaaa.");
+//     fechaVencimiento = prompt("Porfavor, ingrese la fecha de vencimiento en formato dd/mm/aaaa.");
+//     comprasMes = parseInt(prompt("Porfavor, ahora ingrese la cantidad de compras del mes que realizó con su tarjeta de crédito."));
+//     alert("Gracias por sus datos");
 
 
-alert("Bienvenido a la web app para gestionar sus compras del mes con su tarjeta de crédito.");
-alert("Le recomendamos que tenga a mano su resumen anterior.");
-salida = prompt("Desea continuar y/n ?");
-while (salida != "n" && salida != "N"){
-
-    region = prompt("Su lugar de residencia es la Ciudad Autónoma de Buenos Aires (CABA) o Córdoba? y/n");
-    mes = prompt("Porfavor, ingrese el mes en curso.");
-    fechaCierre = prompt("Porfavor, ingrese la fecha de cierre de resumen en formato dd/mm/aaaa.");
-    fechaVencimiento = prompt("Porfavor, ingrese la fecha de vencimiento en formato dd/mm/aaaa.");
-    comprasMes = parseInt(prompt("Porfavor, ahora ingrese la cantidad de compras del mes que realizó con su tarjeta de crédito."));
-    alert("Gracias por sus datos");
-
-
-    for (let i = 1; i <= comprasMes; i++) {
-        valorCompra = parseInt(prompt("Ingrese el valor de la compra nº" + i + ": "));
-        nCuotas = parseInt(prompt("Ingrese la cantidad de cuotas de 1 a 36"));             
-        if (nCuotas > 0 && nCuotas < 36){
-            valorCuota = cuota (valorCompra,nCuotas);
-            acumuladoCuotas = acumuladoCuotas + valorCuota;
-            acumuladoCompras = acumuladoCompras + valorCompra;
-            contadorComprCuotif ++;
-            if (region == "y" || region =="Y"){
-                montoImp = impSellos (valorCuota);
-                acumuladoImp = acumuladoImp + montoImp;
-            }  
-        }
-        else {
-            alert("Ingresó un valor de cuota no válido");
-            break;
-        }  
-    }
-    valorResumen = sumatoriaTotal (acumuladoCuotas,acumuladoImp);
-    console.log("Mes en curso: " + mes + "\n Próxima fecha de cierre: " + fechaCierre + "\n Próximo vencimiento: " + fechaVencimiento + "\n Sub total del mes: " + acumuladoCuotas + "\n Sub total imp: " + acumuladoImp + "\n Monto total financiado: " + acumuladoCompras + "\n Cantidad compras coutificadas: " + contadorComprCuotif + "\n Monto total del resumen: " + valorResumen);
+//     for (let i = 1; i <= comprasMes; i++) {
+//         valorCompra = parseInt(prompt("Ingrese el valor de la compra nº" + i + ": "));
+//         nCuotas = parseInt(prompt("Ingrese la cantidad de cuotas de 1 a 36"));             
+//         if (nCuotas > 0 && nCuotas < 36){
+//             valorCuota = cuota (valorCompra,nCuotas);
+//             acumuladoCuotas = acumuladoCuotas + valorCuota;
+//             acumuladoCompras = acumuladoCompras + valorCompra;
+//             contadorComprCuotif ++;
+//             if (region == "y" || region =="Y"){
+//                 montoImp = impSellos (valorCuota);
+//                 acumuladoImp = acumuladoImp + montoImp;
+//             }  
+//         }
+//         else {
+//             alert("Ingresó un valor de cuota no válido");
+//             break;
+//         }  
+//     }
+//     valorResumen = sumatoriaTotal (acumuladoCuotas,acumuladoImp);
+//     console.log("Mes en curso: " + mes + "\n Próxima fecha de cierre: " + fechaCierre + "\n Próximo vencimiento: " + fechaVencimiento + "\n Sub total del mes: " + acumuladoCuotas + "\n Sub total imp: " + acumuladoImp + "\n Monto total financiado: " + acumuladoCompras + "\n Cantidad compras coutificadas: " + contadorComprCuotif + "\n Monto total del resumen: " + valorResumen);
 
 
 
-    salida = prompt("Desea continuar y/n ?");
-    acumuladoImp = 0;
-    acumuladoCompras = 0;
-    acumuladoCuotas = 0;
-    contadorComprCuotif = 0;
-}
-console.log("Gracias por utilizar nuestra app. Hasta la próxima");
+//     salida = prompt("Desea continuar y/n ?");
+//     acumuladoImp = 0;
+//     acumuladoCompras = 0;
+//     acumuladoCuotas = 0;
+//     contadorComprCuotif = 0;
+// }
+// console.log("Gracias por utilizar nuestra app. Hasta la próxima");
 
 
 
