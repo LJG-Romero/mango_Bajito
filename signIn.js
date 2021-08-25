@@ -1,3 +1,118 @@
+    /* Bloque a refactorizar con una función */
+/* Petición de users DB */
+let usersContainerLocal = localStorage.getItem("arrayUsers");
+let usersContainer = JSON.parse(usersContainerLocal);
+
+$('#btnUser').on('click', function userLogin(){
+    let user = $('#user').val();
+    let password = $('#password').val();
+
+    if (user != "" && password != "") {
+        for (const users of usersContainer) {
+            if (user == users.usuario && password == users.contraseña) {
+                userState = true;
+                sessionStorage.setItem("userCondition", userState);
+                //alert(`Que bueno verte otra vez ${users.nombre} !`);
+                $('#loginContainer').html("");
+                $('#loginContainer').append(`<h2> Bienvenido ${users.nombre} ! </h2> `)
+                console.log("usuario logeado");
+
+            }
+
+            // Desarrollar el else y validación de intentos máximos permitidos.
+
+        }
+    }
+    else{
+        let areas = $('input');
+        //console.log(areas);
+        for (const items of areas) {
+            //console.log(items);
+            if (items.value == "") {
+                alert(`Complete el campo ${items.placeholder}`)
+            }
+        }
+    }
+})
+
+
+        /* Traditional way - Js Vanilla */
+
+// let btnTest = document.getElementById("btnUser");
+// btnTest.addEventListener("click", testFun);
+
+// function testFun (){
+//     let user = document.getElementById("user").value;
+//     let password = document.getElementById("password").value;
+
+//     console.log(user + ' ' + password);
+
+// }
+
+
+        /* Level up - Jquery implementation */
+
+// // let varTest = $('#btnUser');
+// // varTest.on("click", function testFun(){
+
+// $("#btnUser").on("click", function testFun(){
+
+//     let password = $('#password').val();
+//     console.log($('#user').val())
+//     console.log(password);
+// });
+
+
+
+
+
+
+        /* Borrador */
+        
+// let counterCheck = 0;
+
+// if(password == user != ""){
+//     for (const users of usersContainer){
+//         if(user == users.usuario && password == users.usuario){
+//             alert("Creación de usuario exitoso");
+
+//         }
+//     }
+// }
+// else{
+//     //let node = getElementById("errorMsg1");
+//     //let element = document.createElement("p");
+//     counterCheck ++;
+//     // let node2 = document.getElementsByClassName("errorMsg2");
+
+//     for (const nodes of node2) {
+//         let element2 = document.createElement("p");
+//         element2.innerHTML = `Ups ! El usuario y/o la contraseña no coinciden.`
+//         $("#errorMsg2").append(element2);
+            
+//     }
+//     if(counterCheck == 3){
+//         document.getElementById("password").setAttribute("disable", "true");
+//         // document.getElementById("passwordCheck").setAttribute("disable", "true");
+//         alert("Excedió el número máximo de intentos permitidos");
+//         // let node3 = document.getElementById("passwordRescue");
+//         $("#passwordRescue").append = `
+//                                         <p>Lo sentimos, intentamos de otra manera?</p>
+                            
+//                                         <button type="button" id="btnPassResc" style="text-decoration: none; border: 1px solid tomato; border-radius: 10px; padding: 20px; margin: 5px 0px; background-color: lightsalmon; color: tomato; font-family: sans-serif;">Recuperar contraseña</button>
+              
+//                                      `
+//     }
+// }
+
+
+
+
+
+
+
+
+
                                 /* Algoritmo IMPERATIVO inicial */
 
 // const contraseñasIngresadas = [];
@@ -72,54 +187,3 @@
 //     }
 // }
 // while(contraseñasIngresadas.length != cantidad);
-
-
-
-
-
-
-
-
-//let counterCheck = 0;
-
-// if(password === passwordCheck){
-//     usersContainer.push(new Register(name, lastname, bird, user, password));
-//     const usersContainerLocal = JSON.stringify(usersContainer);
-//     sesionStorage.setItem("arrayUsers", usersContainerLocal);
-//     alert("Creación de usuario exitoso");
-
-//     console.log(usersContainerLocal); // Chequeo el storage
-
-// }
-// else{
-//     //let node = getElementById("errorMsg1");
-//     //let element = document.createElement("p");
-//     counterCheck ++;
-//     let node2 = document.getElementsByClassName("errorMsg2");
-
-//     for (const nodes of node2) {
-//         let element2 = document.createElement("p");
-//         element2.innerHTML = `Ups ! Esos mangos no coinciden.`
-//         node2.appendChild(element2)
-            
-//     }
-//     if(counterCheck == 3){
-//         document.getElementById("password").setAttribute("disable");
-//         document.getElementById("passwordCheck").setAttribute("disable");
-//         alert("Excedió el número máximo de intentos permitidos");
-//         let node3 = document.getElementById("passwordRescue");
-//         node3.innerHTML = `
-//                             <p>Lo sentimos ${name}, intentamos de otra manera?</p>
-//                             //Modificar name por user.name
-//                             <button type="button" id="btnPassResc" style="text-decoration: none; border: 1px solid tomato; border-radius: 10px; padding: 20px; margin: 5px 0px; background-color: lightsalmon; color: tomato; font-family: sans-serif;">Recuperar contraseña</button>
-        
-        
-        
-//         `
-        
-
-//     }
-    
-
-
-// }

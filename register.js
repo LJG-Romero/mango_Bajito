@@ -11,6 +11,7 @@
     // Falta desarrollo checkbox y algoritmo para personalizar mensaje de bienvenida por género.
     // Falta implementar asinc o similar para transción entre windows.
     // Falta implementar import y export para reutilizar atributos de los usuarios para las tarjetas de cardManager.
+    // Falta imlementar funciones donde se repiten tareas y reutilizarlas con import y export.
 
     // Falta desarrollar css.
     // Falta implementar efectos btns.
@@ -73,6 +74,9 @@ function nameValidation(){
                 node.innerHTML = "";
                 element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
                 node.appendChild(element);
+                if(userValidation.value == ""){
+                    node.innerHTML = "";
+                }
             }
         }
     }
@@ -145,9 +149,21 @@ function usersFactory(e){
 
         window.location.href = "signIn.html";
     }
-    // else if (password == "" || passwordCheck == "" || user == ""){
+    else if (name == "" || lastname == "" || bird == "" || user == "" || password == "" || passwordCheck == "" ){
+        document.getElementById("btnUser").setAttribute("disable", "true");
+        //e.preventDefault();
+        let node3 = document.getElementsByTagName("input");
+        console.log(node3);
+        //console.log(node3[0].value)
+        for (const items of node3) {
+            // console.log(items.value);
 
-    // }
+            if(items.value == ""){
+                //console.log(items.value);
+                alert(`Complete el campo ${items.placeholder}`)
+            }
+        }
+    }
     else{
         e.preventDefault();
 
