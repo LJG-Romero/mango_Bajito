@@ -1,26 +1,61 @@
-    /* Bloque a refactorizar con una función */
-/* Petición de users DB */
-let usersContainerLocal = localStorage.getItem("arrayUsers");
-let usersContainer = JSON.parse(usersContainerLocal);
-
+let counterCheck = 0;
 $('#btnUser').on('click', function userLogin(){
+
+         /* Bloque a refactorizar con una función */
+    /* Petición de users DB */
+    let usersContainerLocal = localStorage.getItem("arrayUsers");
+    let usersContainer = JSON.parse(usersContainerLocal);
+
     let user = $('#user').val();
     let password = $('#password').val();
 
+    //let i = 0;
+
     if (user != "" && password != "") {
         for (const users of usersContainer) {
+            // i++;
+            // console.log(i); /* Chequeo lógica */
             if (user == users.usuario && password == users.contraseña) {
                 userState = true;
                 sessionStorage.setItem("userCondition", userState);
                 //alert(`Que bueno verte otra vez ${users.nombre} !`);
                 $('#loginContainer').html("");
-                $('#loginContainer').append(`<h2> Bienvenido ${users.nombre} ! </h2> `)
+                $('#loginContainer').append(`<h2 class="welcomTxt" style="display:none;"> Bienvenido ${users.nombre} ! </h2> `);
+
+                        /* Animaciones por CallBack */
+                // $(".welcomTxt").slideDown("slow", function animate(){ 
+                //     $(".welcomTxt").slideUp(3000);
+                // });
+
+                        /* Animaciones por Concatenación */
+                $(".welcomTxt").slideDown("slow").delay(1000).slideUp(3000);
+                
+                setTimeout(function redirection(){
+                    $(location).attr("href","cardManager.html");
+                },4500);
+
                 console.log("usuario logeado");
+                break;
 
             }
-
-            // Desarrollar el else y validación de intentos máximos permitidos.
-
+            else { //if (user != users.usuario || password != users.contraseña){
+                $('#errorMsg').html("");
+                $('#errorMsg').html(` <p> Ups ! El usuario y/o la constraseña no coinciden. </p>`)
+                if (user == users.usuario && password != users.contraseña ){
+                    counterCheck ++;
+                    console.log(counterCheck);
+                }
+                if (counterCheck == 3) {
+                    $('#user').attr("disabled","true");
+                    $('#password').attr("disabled","true");
+                    $('#passwordRescue').html("");
+                    $('#passwordRescue').append(` <h3> Excediste el límite de intentos permitidos. </h3>
+                                                    <p> Probamos de otra menera? </p>
+                                                    <a href="#"> Recuperar contraseña </a>
+                                                 `)
+                    break;
+                }     
+            }
         }
     }
     else{
@@ -65,45 +100,6 @@ $('#btnUser').on('click', function userLogin(){
 
 
 
-
-
-        /* Borrador */
-        
-// let counterCheck = 0;
-
-// if(password == user != ""){
-//     for (const users of usersContainer){
-//         if(user == users.usuario && password == users.usuario){
-//             alert("Creación de usuario exitoso");
-
-//         }
-//     }
-// }
-// else{
-//     //let node = getElementById("errorMsg1");
-//     //let element = document.createElement("p");
-//     counterCheck ++;
-//     // let node2 = document.getElementsByClassName("errorMsg2");
-
-//     for (const nodes of node2) {
-//         let element2 = document.createElement("p");
-//         element2.innerHTML = `Ups ! El usuario y/o la contraseña no coinciden.`
-//         $("#errorMsg2").append(element2);
-            
-//     }
-//     if(counterCheck == 3){
-//         document.getElementById("password").setAttribute("disable", "true");
-//         // document.getElementById("passwordCheck").setAttribute("disable", "true");
-//         alert("Excedió el número máximo de intentos permitidos");
-//         // let node3 = document.getElementById("passwordRescue");
-//         $("#passwordRescue").append = `
-//                                         <p>Lo sentimos, intentamos de otra manera?</p>
-                            
-//                                         <button type="button" id="btnPassResc" style="text-decoration: none; border: 1px solid tomato; border-radius: 10px; padding: 20px; margin: 5px 0px; background-color: lightsalmon; color: tomato; font-family: sans-serif;">Recuperar contraseña</button>
-              
-//                                      `
-//     }
-// }
 
 
 

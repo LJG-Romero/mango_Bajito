@@ -134,20 +134,26 @@ function usersFactory(e){
         localStorage.setItem("arrayUsers", usersContainerLocal);
 
             /* Msg welcom user */
-        // let node1 = document.getElementById("registerContainer");
-        // node1.innerHTML= `<h2 style="color:tomato; font-size: 50px; text-align:center;">
+        let node1 = document.getElementById("registerContainer");
+        node1.innerHTML= `<h2 style="color:tomato; font-size: 50px; text-align:center;">
         
-        //                    ${name} ${lastname}, bienvenido a la comunidad Mango Bajito !
+                           ${name} ${lastname}, bienvenido a la comunidad Mango Bajito !
         
         
-        //                     </h2>`
-
-        alert("Creación de usuario exitoso");
-        alert("Inicia sesión nuevamente");
+                            </h2>`
+        // window.addEventListener("DOMContentLoaded", function await(){
+        //     alert("Creación de usuario exitoso");
+        //     alert("Inicia sesión nuevamente");
+            
+        // })
 
         e.preventDefault(); // Provisorio para poder realizar el redireccionamiento a sección SingIn
 
-        window.location.href = "signIn.html";
+        setTimeout(function redirection(){
+            alert("Creación de usuario exitoso");
+            alert("Inicia sesión nuevamente");
+            window.location.href = "signIn.html";
+        },300);
     }
     else if (name == "" || lastname == "" || bird == "" || user == "" || password == "" || passwordCheck == "" ){
         document.getElementById("btnUser").setAttribute("disable", "true");
