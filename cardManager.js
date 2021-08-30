@@ -1,22 +1,17 @@
-let mes = "";
-let salida = "";
-let region = "";
-let fechaCierre = "";
-let fechaVencimiento = "";
+const urlJson = "data.json";
 
-let comprasMes = 0;
-let nCuotas = 0;
-let valorCompra = 0;
-let montoImp = 0;
-let valorCuota = 0;
-let valorResumen = 0;
-
-
-let acumuladoImp = 0;
-let acumuladoCompras = 0;
-let acumuladoCuotas = 0;
-
-let contadorComprCuotif = 0;
+$.ajax({
+    method: "GET",
+    url: urlJson,
+    success: function dataCollected(answer){
+        //console.log(answer);
+        for (const months of answer) {
+            $("#month").append( `
+                                <option value="${months.value}">${months.month}</option>
+                                `) 
+        }
+    }
+})
 
 class Cards{
     constructor(nombre, apellido, lastNumbers, cardExp){
@@ -28,7 +23,6 @@ class Cards{
 }
 const cardsContainer = [];
 
-
 let card = document.getElementById("btn");
 card.addEventListener ("click", cardsFactory);
 function cardsFactory() {
@@ -36,11 +30,10 @@ function cardsFactory() {
     let name = document.getElementById("name").value;
     let lastname = document.getElementById("lastname").value;
     let lastNumbers = document.getElementById("lastNumbers").value;
-    //let nodo = document.getElementsByClassName("cards__Basket");
 
     cardsContainer.push(new Cards(name,lastname,lastNumbers));
 
-    console.log(cardsContainer) //Chequeo array
+    //console.log(cardsContainer) //Chequeo array
 
     document.getElementById("cards__Basket").innerHTML = "";
     for (const cards of cardsContainer) {
@@ -63,10 +56,8 @@ function cardsFactory() {
                                 </div>
 
                             `;
-        nodo.appendChild(elemento);
-        
+        nodo.appendChild(elemento);  
     }
-
 
     //elemento.setAttribute("style","height: 200px;");
     //elemento.setAttribute("style","width: 350px;");
@@ -74,15 +65,7 @@ function cardsFactory() {
     //elemento.setAttribute("style","box-shadow: 0px 1px 5px tomato;");
     //elemento.setAttribute("style","border-radius: 10px;");
 
-    //** setAttribute solo inserta un atributo y/o modifica existene.
-    
-
-    
-
-    //** Modelo card
-    //<div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;"></div>//
-    
-
+        //** setAttribute solo inserta un atributo y/o modifica existene.
 
     document.getElementById("cardSelector").innerHTML = "";
     for (const cards of cardsContainer) {
@@ -90,17 +73,34 @@ function cardsFactory() {
         let nodo2 = document.getElementById("cardSelector");
         let elemento2 = document.createElement("option");
         elemento2.innerHTML = `
-            ${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}
-        `
+                            ${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}
+                             `
         nodo2.appendChild(elemento2);
-        
     }
-    
 }
 
 
 
-// ** Plantilla del algoritmo a refactorizar 
+                        /* Algoritmo IMPERATIVO inicial */
+// let mes = "";
+// let salida = "";
+// let region = "";
+// let fechaCierre = "";
+// let fechaVencimiento = "";
+
+// let comprasMes = 0;
+// let nCuotas = 0;
+// let valorCompra = 0;
+// let montoImp = 0;
+// let valorCuota = 0;
+// let valorResumen = 0;
+
+
+// let acumuladoImp = 0;
+// let acumuladoCompras = 0;
+// let acumuladoCuotas = 0;
+
+// let contadorComprCuotif = 0;
 
 // const cuota = (valorCompra, nCuotas) => {return valorCompra / nCuotas};
 // const impSellos = (valorCompra) => {return valorCompra * 0.015};
