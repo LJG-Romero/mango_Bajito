@@ -5,35 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Java Script - Coder</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body style="margin: 0px; padding: 0px; box-sizing: border-box;">
-    <header style="display: flex; flex-direction: row; width: 100vw; height: 200px; background-color: lightsalmon;">
-        <div style="width: 30%; height: 100%; margin-left: 40px; margin-top: 0px;">
-            <h1 style="font-weight: bold; font-family: sans-serif; font-size: 40px;"><a href="index.html" style="text-decoration: none; color: tomato;">Mango Bajito</a></h1>
+
+    <header>
+        <div class="header__Logo">
+            <h1>Mango Bajito</h1>
         </div>
-        <nav style="display: flex; flex-direction: row; justify-content: flex-end; width: 80%; height: 100%;">
-            <ul style="display: flex; flex-direction: row; justify-content: flex-end; height: 30%; width: 200px;">
-                <li style="list-style-type: none;"><a href="index.html" style="text-decoration: none; margin: 5px; color: tomato; font-family: sans-serif;">Inicio</a></li>
-                <li style="list-style-type: none;"><a href="cardManager.html" style="text-decoration: none; margin: 5px; color: tomato; font-family: sans-serif;">Gestor de tarjetas</a></li>
+        <nav class="header__Nav">
+            <ul class="header__Nav--Sections">
+                <li class="mainLinks" ><a href="index.html">Home</a></li>
+                <li class="mainLinks"><a href="cardManager.html">Gestor Tarjetas</a></li>
+                
+                <li class="mobileLinks"><a href="index.html"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
+                <li class="mobileLinks"><a href="cardManager.html"><i class="fa fa-credit-card fa-lg" aria-hidden="true"></i></a></li>
+
             </ul>
-            <ul style=" display: flex; flex-direction: row; justify-content: flex-end; height: 50%; width: 200px;">
-                <li style="list-style-type: none;"><a href="register.html" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px; background-color: lightgray; color: white; font-family: sans-serif;">Register</a></li>
-                <li style="list-style-type: none;"><a href="signIn.html" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px; color: whitesmoke; font-family: sans-serif;">Sign In</a></li>
+            <ul class="header__Nav--Login">
+                <li class="buttonReg"><a href="register.html">Register</a></li>
+                <li class="buttonSign"><a href="signIn.html">Sing In</a></li>
+
+                <li class="mobileLinks shellReg"><a href="register.html"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i></a></li>
+                <li class="mobileLinks shellSign"><a href="signIn.html"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i></a></li>
+
             </ul>
+            <div class="header__Nav--Menuham">
+                <!-- Hamburguer menu icon or specific sections icons -->
+            </div>
         </nav>
-    </header>
+    </header> 
     <main>
-        <h2>Bienvenido al proyecto de Java Script - Coder</h2>
-        <ul>
-            <li>Docente: Anthony Trillo.</li>
-            <li>Tutor: Matías Agobian</li>
-            <li>Alumno: Lucas José Gabriel Romero.</li>
-            <li>Camada: 18375.</li>
-        </ul>
-        <p>Lo invitamos a abrir la consola para poder continuar con el ejercicio de práctica, gracias !</p>
+        <section class="principal">
+                <div class="principal__Msg">
+                    <h2>Bienvenidos</h2>
+                    <!-- <p>Tus finanzas en un solo lugar !</p>
+                    <p>Ahorrar es posible ! </p> -->
+                    <!-- <p>Tus ahorros y finanzas en un solo lugar ! </p> -->
+                    <p>De nuevo fin de mes y no parás de mirar el calendario?</p>
+                    <p>Basta, ahorrar es posible !</p>
+                    <p><strong>Mango Bajito</strong>, tus finanzas en un solo lugar</p>
+                </div>
+                <div class="principal__Img">
+                    <img src="img.jpg" alt="">
+                </div>
+        </section>
     </main>
-    
-    
+    <footer>
+        <p class="credits" >Powered by <strong>Lucas Romero</strong></p>
+    </footer>
+    <script src="https://use.fontawesome.com/03d061c738.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
