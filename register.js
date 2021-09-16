@@ -24,7 +24,7 @@ class Register{
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.id = counter++;
+        this.id = id;
     }
         /* Class method example */
     // saludar(nombre){
@@ -34,7 +34,6 @@ class Register{
 } 
 
 let passCheck = false;
-let counter = 1;
 
 /* Live validation of user name availability  */
 
@@ -49,7 +48,7 @@ function nameValidation(){
     let usersContainer = JSON.parse(usersContainerLocal);
     
     let node = document.getElementById("errorMsg1");
-    let element = document.createElement("p");
+    // let element = document.createElement("p");
 
     if(usersContainerLocal = usersContainer != null){
         
@@ -60,20 +59,25 @@ function nameValidation(){
             if(userValidation.value == users.usuario){
                 //console.log("coinciden")
                 node.innerHTML = "";
-                element.innerHTML = `Ups ! ${userValidation.value} no está 
-                                    disponible.`
+                // element.innerHTML = `<p class="error">Ups ! ${userValidation.value} no está 
+                //                     disponible.</p>`
+                node.innerHTML = `<p class="error">Ups ! ${userValidation.value} no está 
+                                    disponible.</p>`
                                     
                                     // Intenta otra vez, mango${userValidation.value} no suena 
                                     // tan mal no? ... Mi programador se cree con mucho 'humor' ${String.
                                     // fromCodePoint(0x1F612)}`
-                node.appendChild(element);
+                // node.appendChild(element);
+                document.getElementById("btnUser").setAttribute("disabled", true);
                 break;
             }
             else if (userValidation.value != users.usuario){
                 //console.log("o entra por aca")
                 node.innerHTML = "";
-                element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
-                node.appendChild(element);
+                // element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
+                node.innerHTML = `<p class="success">${userValidation.value} se oye bien. Sigamos !</p>`
+                // node.appendChild(element);
+                document.getElementById("btnUser").removeAttribute("disabled");
                 if(userValidation.value == ""){
                     node.innerHTML = "";
                 }
@@ -82,8 +86,9 @@ function nameValidation(){
     }
     else{
         node.innerHTML = "";        
-        element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
-        node.appendChild(element);
+        // element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
+        node.innerHTML = `<p class="success">${userValidation.value} se oye bien. Sigamos !</p>`
+        // node.appendChild(element);
         if(userValidation.value == ""){
             node.innerHTML = "";
         }
@@ -105,7 +110,7 @@ function usersFactory(e){
         password = document.getElementById("password").value,
         passwordCheck = document.getElementById("passwordCheck").value;
 
-    if(password === passwordCheck && password != "" && passwordCheck != "" && user != ""){
+    if(password === passwordCheck && name != "" && lastname != "" && bird != "" && user != "" && password != "" && passwordCheck != ""){
         // (password = passwordCheck != "") && user != "" Esta versión mas corta no funcionó. Pass almacena true ! 
         //console.log("Funciona checkeo campos");
         
@@ -127,17 +132,18 @@ function usersFactory(e){
             // console.log(usersContainerLocal); // Chequeo el storage local y de origen.
             // console.log(usersContainer);
         }
+        let idQuery = usersContainer.length;
         
-        usersContainer.push(new Register(name, lastname, bird, user, password));
+        usersContainer.push(new Register(name, lastname, bird, user, password, idQuery));
         
         usersContainerLocal = JSON.stringify(usersContainer);
         localStorage.setItem("arrayUsers", usersContainerLocal);
 
             /* Msg welcom user */
         let node1 = document.getElementById("registerContainer");
-        node1.innerHTML= `<h2 style="color:tomato; font-size: 50px; text-align:center;">
+        node1.innerHTML= `<h2>
         
-                           ${name} ${lastname}, bienvenido a la comunidad Mango Bajito !
+                           ${name} ${lastname}, bienvenido a la comunidad <strong>Mango Bajito</strong> !
         
         
                             </h2>`
@@ -156,8 +162,6 @@ function usersFactory(e){
         },300);
     }
     else if (name == "" || lastname == "" || bird == "" || user == "" || password == "" || passwordCheck == "" ){
-        document.getElementById("btnUser").setAttribute("disable", "true");
-        //e.preventDefault();
         let node3 = document.getElementsByTagName("input");
         console.log(node3);
         //console.log(node3[0].value)
@@ -169,6 +173,7 @@ function usersFactory(e){
                 alert(`Complete el campo ${items.placeholder}`)
             }
         }
+        e.preventDefault();
     }
     else{
         e.preventDefault();

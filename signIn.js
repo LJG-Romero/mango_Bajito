@@ -16,8 +16,12 @@ $('#btnUser').on('click', function userLogin(){
             // i++;
             // console.log(i); /* Chequeo lógica */
             if (user == users.usuario && password == users.contraseña) {
-                userState = true;
+                // let name = users.nombre;
+                // let surname = users.apellido;
+                let userState = true;
                 sessionStorage.setItem("userCondition", userState);
+                let userIdLog = users.id;
+                sessionStorage.setItem("userId", userIdLog);
                 //alert(`Que bueno verte otra vez ${users.nombre} !`);
                 $('#loginContainer').html("");
                 $('#loginContainer').append(`<h2 class="welcomTxt" style="display:none;"> Bienvenido ${users.nombre} ! </h2> `);
@@ -40,7 +44,7 @@ $('#btnUser').on('click', function userLogin(){
             }
             else { //if (user != users.usuario || password != users.contraseña){
                 $('#errorMsg').html("");
-                $('#errorMsg').html(` <p> Ups ! El usuario y/o la constraseña no coinciden. </p>`)
+                $('#errorMsg').html(` <p class="error"> Ups ! El usuario y/o la constraseña no coinciden.</p>`)
                 if (user == users.usuario && password != users.contraseña ){
                     counterCheck ++;
                     console.log(counterCheck);
@@ -50,8 +54,8 @@ $('#btnUser').on('click', function userLogin(){
                     $('#password').attr("disabled","true");
                     $('#passwordRescue').html("");
                     $('#passwordRescue').append(` <h3> Excediste el límite de intentos permitidos. </h3>
-                                                    <p> Probamos de otra menera? </p>
-                                                    <a href="#"> Recuperar contraseña </a>
+                                                    <p> ¿Probamos de otra menera? <a href="recoveryPass.html"> <strong>Recuperar contraseña</strong> </a></p>
+                                                    
                                                  `)
                     break;
                 }     

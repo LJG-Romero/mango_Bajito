@@ -5,158 +5,169 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body style="margin: 0px; padding: 0px; box-sizing: border-box;">
-    <header style="display: flex; flex-direction: row; width: 100vw; height: 200px; background-color: lightsalmon;">
-        <div style="width: 30%; height: 100%; margin-left: 40px; margin-top: 0px;">
-            <h1 style="font-weight: bold; font-family: sans-serif; font-size: 40px;"><a href="index.html" style="text-decoration: none; color: tomato;">Mango Bajito</a></h1>
+<body>
+    <header>
+        <div class="header__Logo">
+            <h1>Mango Bajito</h1>
         </div>
-        <nav style="display: flex; flex-direction: row; justify-content: flex-end; width: 80%; height: 100%;">
-            <ul style="display: flex; flex-direction: row; justify-content: flex-end; height: 30%; width: 200px;">
-                <li style="list-style-type: none;"><a href="index.html" style="text-decoration: none; margin: 5px; color: tomato; font-family: sans-serif;">Inicio</a></li>
-                <li style="list-style-type: none;"><a href="cardManager.html" style="text-decoration: none; margin: 5px; color: tomato; font-family: sans-serif;">Gestor de tarjetas</a></li>
+        <nav class="header__Nav">
+            <ul class="header__Nav--Sections">
+                <li class="mainLinks" ><a href="index.html">Home</a></li>
+                <li class="mainLinks cardStatus"><a href="cardManager.html">Gestor Tarjetas</a></li>
+                
+                <li class="mobileLinks"><a href="index.html"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
+                <li class="mobileLinks cardStatusMobile"><a href="cardManager.html"><i class="fa fa-credit-card fa-lg" aria-hidden="true"></i></a></li>
+
             </ul>
-            <ul style=" display: flex; flex-direction: row; justify-content: flex-end; height: 50%; width: 200px;">
-                <li style="list-style-type: none;"><a href="register.html" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px; background-color: lightgray; color: white; font-family: sans-serif;">Register</a></li>
-                <li style="list-style-type: none;"><a href="signIn.html" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px; color: whitesmoke; font-family: sans-serif;">Sign In</a></li>
+            <ul class="header__Nav--Login">
+                <li class="buttonReg"><a href="register.html">Registro</a></li>
+                <li class="buttonSign"><a href="signIn.html">Ingresar</a></li>
+
+                <li class="mobileLinks shellReg"><a href="register.html"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i></a></li>
+                <li class="mobileLinks shellSign"><a href="signIn.html"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i></a></li>
+
             </ul>
+            <div class="header__Nav--User">
+                <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                <p class="userProfile"></p>
+                <ul class="userMenu">
+                    <li>Salir</li>
+                </ul>
+                <!-- Hamburguer menu icon or specific sections icons -->
+            </div>
         </nav>
-    </header>
+    </header> 
     
-    <main style="width: 100vw; height: 1800px; display: flex; flex-direction: column; justify-content: center; align-items: center;" id="main">
-        <!-- <div style="height: 200px; width: 350px; background-color: lightsalmon; box-shadow: 0px 1px 5px tomato; border-radius: 10px;">
-            <h3 style="height: 15%;">Visa</h3>
-            <p style="height: 15%;">Lucas Romero</p>
-            <p style="height: 15%;">xxxx xxxx xxxx xxxx</p>
-            <div style="height: 15%; display: flex; flex-direction: row; justify-content: space-evenly;">
-                <p>xx/xx</p>
-                <p>xxx</p>
-            </div>
+    <main>
+        <!-- style="width: 100vw; height: 1800px; display: flex; flex-direction: column; justify-content: center; align-items: center;" id="main" -->
+        <section class="principal principalCardman">
+            <section class="cards" style="width: 100vw; display: flex; flex-direction: column; justify-content: center; border: 1px solid blue;" >
+                <h2 class="titles">Tarjetas</h2>
+                <!-- style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;" -->
+                <div style="display: flex; flex-direction: row; justify-content: center; border: 1px solid red;">
+                    <form action="" class="cards__Form" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
 
-        </div>  -->
+                        <label>Tipo de tarjeta</label>
+
+                        <br>
+                        <input type="radio" name="cardType" id="own" value="true">
+                        <label for="own">Propia</label>
+                        <br>
+                        <input type="radio" name="cardType" id="other" value="false">
+                        <label for="other">Tercero</label>
+
+                        <br>
+
+                        <label for="name">Nombre</label>
+                        <br>
+                        <input type="text" name="name" id="name">
+
+                        <br>
+                        <label for="lastname">Apellido</label>
+                        <br>
+                        <input type="text" name="lastname" id="lastname">
+
+                        <div class="thirdParty">
+                            <!-- Aqui se tomaran los datos de tarjetas de terceros. Manipulación DOM según selección anterior -->
+
+                        </div>
+
+                        <label for="lastNumbers">Terminación</label>
+                        <br>
+                        <input type="number" name="lastNumbers" id="lastNumbers">
+                        <br>
+                        <button type="button" id="btn" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px 0px; background-color: lightgray; color: white; font-family: sans-serif;">Agregar tarjeta</button>
+
+                    
+
+                    </form>
+                    <aside id="cards__Basket" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
+                        <p>No hay tarjetas registradas. Carga una tarjeta ! </p>
+
+                    </aside>
+                </div>
+            </section>
         
-        <section class="cards" style="width: 100vw; display: flex; flex-direction: column; justify-content: center; border: 1px solid blue;" >
-            <h2 style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;">Tarjetas</h2>
-            <div style="display: flex; flex-direction: row; justify-content: center; border: 1px solid red;">
-                <form action="" class="cards__Form" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-
-                    <label>Tipo de tarjeta</label>
-
-                    <br>
-                    <input type="radio" name="cardType" id="own" value="true">
-                    <label for="own">Propia</label>
-                    <br>
-                    <input type="radio" name="cardType" id="other" value="false">
-                    <label for="other">Tercero</label>
-
-                    <br>
-
-                    <label for="name">Nombre</label>
-                    <br>
-                    <input type="text" name="name" id="name">
-
-                    <br>
-                    <label for="lastname">Apellido</label>
-                    <br>
-                    <input type="text" name="lastname" id="lastname">
-
-                    <div class="thirdParty">
-                        <!-- Aqui se tomaran los datos de tarjetas de terceros. Manipulación DOM según selección anterior -->
-
-                    </div>
-
-                    <label for="lastNumbers">Terminación</label>
-                    <br>
-                    <input type="number" name="lastNumbers" id="lastNumbers">
-                    <br>
-                    <button type="button" id="btn" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px 0px; background-color: lightgray; color: white; font-family: sans-serif;">Agregar tarjeta</button>
-
-                
-
-                </form>
-                <aside id="cards__Basket" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                    <p>No hay tarjetas registradas. Carga una tarjeta ! </p>
-
-                </aside>
-            </div>
-        </section>
 
         
 
-        <section class="months">
-            <h2 style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;">Calendario</h2>
-            <div style="display: flex; flex-direction: row; justify-content: center;">
-                <form action="" class="months__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                    <label for="month">Mes de compra.</label>
-                    <br>
-                    <select name="month" id="month">
-                        <!-- <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option> -->
-                    </select>
+            <section class="months">
+                <h2 class="titles">Calendario</h2>
+                <div style="display: flex; flex-direction: row; justify-content: center;">
+                    <form action="" class="months__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
+                        <label for="month">Mes de compra.</label>
+                        <br>
+                        <select name="month" id="month">
+                            <!-- <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option> -->
+                        </select>
 
-                    <br>
-                
-                    <label for="clousure">Fecha de cierre de resumen.</label>
-                    <br>
-                    <input type="date" name="clousure" id="clousure">
+                        <br>
+                    
+                        <label for="clousure">Fecha de cierre de resumen.</label>
+                        <br>
+                        <input type="date" name="clousure" id="clousure">
 
-                    <br>
-        
-                    <label for="expiration">Fecha de vencimiento </label>
-                    <br>
-                    <input type="date" name="expiration" id="expiration">
-                
-                </form>
-                <aside class="months__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                    <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
+                        <br>
+            
+                        <label for="expiration">Fecha de vencimiento </label>
+                        <br>
+                        <input type="date" name="expiration" id="expiration">
+                    
+                    </form>
+                    <aside class="months__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
+                        <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
 
-                </aside>
-            </div>
-        </section>
+                    </aside>
+                </div>
+            </section>
 
-        <section class="purchases">
-            <h2 style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;">Compras</h2>
-            <div style="display: flex; flex-direction: row; justify-content: center;">
-                <form action="" class="purchases__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
+            <section class="purchases">
+                <h2 class="titles">Compras</h2>
+                <div style="display: flex; flex-direction: row; justify-content: center;">
+                    <form action="" class="purchases__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
 
 
-                    <label for="amount">Monto de compra</label>
-                    <br>
-                    <input type="number" name="amount" id="amount">
+                        <label for="amount">Monto de compra</label>
+                        <br>
+                        <input type="number" name="amount" id="amount">
 
-                    <br>
+                        <br>
 
-                    <label for="payments">Cantidad de cuotas</label>
-                    <br>
-                    <input type="number" name="payments" id="payments">
+                        <label for="payments">Cantidad de cuotas</label>
+                        <br>
+                        <input type="number" name="payments" id="payments">
 
-                    <br>
+                        <br>
 
-                    <label for="cardSelector">Seleccione tarjeta</label>
-                    <select name="cardSelector" id="cardSelector">
-                        <!-- Aqui van las opciones de tarjetas que se agregarán en formulario tarjetas -->
-                    </select>
+                        <label for="cardSelector">Seleccione tarjeta</label>
+                        <select name="cardSelector" id="cardSelector">
+                            <!-- Aqui van las opciones de tarjetas que se agregarán en formulario tarjetas -->
+                        </select>
 
-                    <br>
+                        <br>
 
-                    <input type="submit" value="Cargar">
-                </form>
-                <aside class="purchases__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                    <p>No tienes movimientos registrados. Realiza una compra ! </p>
+                        <input type="submit" value="Cargar">
+                    </form>
+                    <aside class="purchases__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
+                        <p>No tienes movimientos registrados. Realiza una compra ! </p>
 
-                </aside>
-            </div>
+                    </aside>
+                </div>
 
+            </section>
         </section>
 
 
@@ -165,8 +176,10 @@
 
     </main> 
     <footer>
-
+        <p class="credits" >Powered by <strong>Lucas Romero</strong></p>
+        <!-- <p class="collaborations">Img supplier <a class="credits__Anch" href="https://www.vecteezy.com/free-vector/human" title="Human Vectors by Vecteezy">Vecteezy</a></p> -->
     </footer>
+    <script src="https://use.fontawesome.com/03d061c738.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script src="cardManager.js"></script>

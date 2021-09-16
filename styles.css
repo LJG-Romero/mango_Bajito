@@ -5,7 +5,7 @@
     font-family: sans-serif;
 }
 
-/* Variables */
+/*** Variables ***/
 :root{
         /* Backgrounds colors */
     --header-background: linear-gradient(33deg, rgba(235,255,111,1) 25%, rgba(255,178,111,1) 53%, rgba(218,88,59,1) 100%);
@@ -16,11 +16,13 @@
         /* Borders modeling */
     --principal: greenyellow;
     --secondary: lightblue;
-    --terceary: violet;
+    --tertiary: violet;
+    --quaternary: blue;
 
     --principal: transparent;
     --secondary: transparent;
-    --terceary: transparent;
+    --tertiary: transparent;
+    --quaternary: transparent;
 
         /* Colors */
     --linksNav: lightyellow;
@@ -30,7 +32,7 @@
     --strongs: rgba(218,88,59,1);
 }
 
-/* Animates */
+/*** Animates ***/
 @keyframes mainAnimate {
     33.33%{
         margin-top: 100px;
@@ -42,24 +44,6 @@
         margin-top: 70px;
     }
 }
-/* @keyframes mainAnimate {
-    25%{
-        margin-top: 100px;
-        padding-right: 20px;
-    }
-    50%{
-        margin-top: 70px;
-        padding-right: 0px;
-    }
-    75%{
-        margin-top: 40px;
-        padding-right: 20px;
-    }
-    100%{
-        margin-top: 70px;
-        padding-right: 0px;
-    }
-} */
 @keyframes mainAnimateTablets {
     33.33%{
         margin-right: 50px;
@@ -71,26 +55,8 @@
         margin-left:0px;
     }
 }
-/* @keyframes mainAnimateTablets {
-    25%{
-        margin-right: 50px;
-        padding-bottom: 10px;
-    }
-    50%{
-        margin-right: 0px;
-        padding-bottom: 0px;
-    }
-    75%{
-        margin-left: 50px;
-        padding-bottom: 10px;
-    }
-    100%{
-        margin-left:0px;
-        padding-bottom: 0px;
-    }
-} */
 
-/* Generics */
+/*** Generics ***/
 h1{
     color: var(--titles);
     font-size: 40px;
@@ -102,12 +68,15 @@ h2{
     font-size: 70px;
     font-weight: normal;
     text-align: center;
-    border: 1px solid var(--terceary);
+    border: 1px solid var(--tertiary);
+}
+h3{
+    color: var(--strongs);
 }
 p{
     color: var(--paragraphs);
     font-size: 15px;
-    border: 1px solid var(--terceary);
+    border: 1px solid var(--tertiary);
     text-align: center;
 }
 li{
@@ -142,8 +111,22 @@ li:hover a{
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
 }
+.titles{
+    /* border-radius: 20px 100px 20px 100px; */
+    /* background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); */
+    text-align: center;
+    font-size: 40px;
+    color: var(--titles);
+    /* line-height: 70px; */
+}
+.error{
+    color: var(--strongs);
+}
+.success{
+    color: rgb(207, 241, 81);
+}
 
-/* Header */
+/*** Header ***/
 header{
     display: flex;
     flex-direction: row;
@@ -190,10 +173,26 @@ header{
 
     border: 2px solid var(--secondary);
 }
-.header__Nav--Menuham{
+.header__Nav--User{
+    width: 250px;
+    height: 50px;
     display:none;
+
+    border: 2px solid var(--secondary);
+}
+.header__Nav--User i{
+    color: var(--linksNav);
+}
+.userProfile{
+    color: var(--linksNavHover);
+}
+.userMenu{
+    display: none;
 }
 .mobileLinks{
+    display: none;
+}
+.cardStatus{
     display: none;
 }
 .buttonReg{
@@ -234,9 +233,10 @@ header{
     border-bottom: 0px transparent;
 }
 
-/* Main */
+/*** Main ***/
 main{
     background: var(--main-background);
+    /* height: 500px; */
 
     /* border: 1px solid red; */
 }
@@ -273,10 +273,157 @@ main{
 .principal__Img img {
     height: 100%;
     width: 100%;
-    border: 1px solid var(--terceary);
+    border: 1px solid var(--tertiary);
 }
 
-/* Footer */
+        /** Section Register && Sign In **/
+.principalRegsig{
+    justify-content: space-evenly;
+    /* align-items: center; */
+}
+.principalRegsig__View{
+    width: 500px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* align-content: center; */
+    border: 1px solid var(--secondary);
+    margin-top: 85px;
+}
+.principalRegsig__View__Holder{
+    width: 500px;
+    height: 400px;
+    border: 1px solid var(--tertiary);
+}
+.principalRegsig__View__Holder img{
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+#registerContainer, #loginContainer{
+    width: 500px;
+    height: 450px;
+    border: 1px solid var(--secondary);
+    margin-top: 85px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.register__Form, .signin__Form{
+    border: 1px solid var(--tertiary);
+    /* box-shadow: 0px 0px 5px var(--strongs); */
+    /* background: var(--header-background);
+    opacity: 0.7; */
+
+    width: 400px;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.signin__Form{
+    height: 300px;
+}
+.register__Form label{
+    text-align: center;
+    display: none;
+}
+.signin__Form label{
+    text-align: center;
+    display: none;
+}
+.register__Form input{
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    /* border: 1px solid var(--strongs); */
+    border: none;
+    box-shadow: 0px 0px 5px var(--strongs);
+    color: var(--paragraphs);
+
+    text-align: center;
+    font-size: 20px;
+}
+.register__Form input:focus{
+    outline: none;
+    border: 1px solid var(--linksNavHover);
+    box-shadow: none;
+    /* box-shadow: 0px 0px 5px var(--linksNavHover); */
+}
+    .signin__Form input{
+        width: 90%;
+        height: 40px;
+        border-radius: 20px;
+        /* border: 1px solid var(--strongs); */
+        border: none;
+        box-shadow: 0px 0px 5px var(--strongs);
+        color: var(--paragraphs);
+
+        text-align: center;
+        font-size: 20px;
+    }
+    .signin__Form input:focus{
+        outline: none;
+        border: 1px solid var(--linksNavHover);
+        box-shadow: none;
+        /* box-shadow: 0px 0px 5px var(--linksNavHover); */
+    }
+.register__Form input::placeholder{
+    color: var(--paragraphs);
+}
+    .signin__Form input::placeholder{
+        color: var(--paragraphs);
+    }
+    
+.register__Form input::-webkit-calendar-picker-indicator{
+    display: none;
+}
+#btnUser{
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    width: 200px;
+    font-size: 20px;
+    color: var(--strongs);
+    box-shadow: 0px 0px 5px var(--strongs);
+    background: var(--regBtn-background);
+}
+#btnUser:hover{
+    color: var(--linksNav);
+    box-shadow: 0px 0px 5px var(--linksNavHover);
+
+}
+#passwordRescue{
+    border: 1px solid var(--quaternary);
+}
+#passwordRescue p{
+    margin-top: 5px;
+}
+#passwordRescue a{
+    color: var(--paragraphs);
+    font-size: 15px;
+}
+#passwordRescue a:hover{
+    color: var(--strongs);
+    /* slateblue; */
+}
+.principalReco{
+    justify-content: center;
+}
+.principalReco__View{
+    margin-top: 115px;
+}
+        /** Section Card Manager **/
+.principalCardman{
+    display: block;
+
+}
+
+/*** Footer ***/
 footer{
     height: 50px;
     width: 100vw;
@@ -285,18 +432,27 @@ footer{
     background: var(--header-background);
     border-radius: 50% 50% 0px 0px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     
 }
 .credits{
-    padding-top: 15px;
+    /* padding-top: 15px; */
     color: var(--strongs);
 }
+.credits__Anch{
+    font-size: 12.5px;
+    color: var(--paragraphs);
+}
+.collaborations{
+    font-size: 12.5px;
+}
 
-/*Media queries*/
 
-    /* Query for Small Mobiles */
+/*** Media queries ***/
+
+        /** Query for Small Mobiles **/
 @media (max-width:650px){ 
     h1{
         font-size: xx-large;
@@ -319,6 +475,12 @@ footer{
     .mobileLinks{
         display: inline-flex;
         /* border: 1px solid blue; */
+    }
+    /* .cardStatus{
+        display: none;
+    } */
+    .cardStatusMobile{
+        display: none;
     }
     .shellReg{
         height: 50px;
@@ -387,9 +549,34 @@ footer{
         margin-right: 0px;
         margin-top: 0px;
     }
+    .principalRegsig{
+        flex-direction: column-reverse;
+        justify-content: center;
+
+    }
+    .principalRegsig__View{
+        margin-top: 70px;
+        height: 50px;
+    }
+    .regMob{
+        margin-top: 0px;
+    }
+    #loginContainer, #registerContainer{
+        margin-top: 0px;
+    }
+    .principalRegsig__View__Holder{
+        display: none;
+    }
+    .principalReco__View{
+        margin-top: 53px;
+        height: 450px;
+    }
+    .recoHolder{
+        display: block;
+    }
 }
 
-    /* Query for Mobiles */
+        /** Query for Mobiles **/
 @media (min-width:650px) and (max-width:768px){
     h1{
         font-size: xx-large;
@@ -402,7 +589,7 @@ footer{
     .header__Nav{
         width: 270px;
     }
-    /* .header__Nav--Menuham{
+    /* .header__Nav--User{
         display: none;
         
         border: 1px solid var(--secondary);
@@ -417,6 +604,12 @@ footer{
     .mobileLinks{
         display: inline-flex;
         /* border: 1px solid blue; */
+    }
+    /* .cardStatus{
+        display: none;
+    } */
+    .cardStatusMobile{
+        display: none;
     }
     .shellReg{
         height: 50px;
@@ -485,9 +678,34 @@ footer{
         margin-right: 0px;
         margin-top: 0px;
     }
+    .principalRegsig{
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+    .principalRegsig__View{
+        margin-top: 70px;
+        height: 50px;
+    }
+    .regMob{
+        margin-top: 0px;
+    }
+    #loginContainer, #registerContainer{
+        margin-top: 0px;
+        /* height: 350px; */
+    }
+    .principalRegsig__View__Holder{
+        display: none;
+    }
+    .principalReco__View{
+        margin-top: 53px;
+        height: 450px;
+    }
+    .recoHolder{
+        display: block;
+    }
 }
 
-    /* Query for Tablets */
+        /** Query for Tablets **/
 @media (min-width:768px) and (max-width:992px){
     h1{
         font-size: xx-large;
@@ -521,5 +739,14 @@ footer{
     .principal__Msg{
         margin-right: 0px;
         margin-top: 0px;
+    }
+    .principalRegsig{
+        flex-direction: row;
+    }
+    .principalRegsig__View, #registerContainer, #loginContainer{
+        margin-top: 0px;
+    }
+    .principalReco__View{
+        margin-top: 53px;
     }
 }
