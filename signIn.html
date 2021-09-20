@@ -19,7 +19,6 @@
                 
                 <li class="mobileLinks"><a href="index.html"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
                 <li class="mobileLinks cardStatusMobile"><a href="cardManager.html"><i class="fa fa-credit-card fa-lg" aria-hidden="true"></i></a></li>
-
             </ul>
             <ul class="header__Nav--Login">
                 <li class="buttonReg"><a href="register.html">Registro</a></li>
@@ -27,49 +26,41 @@
 
                 <li class="mobileLinks shellReg"><a href="register.html"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i></a></li>
                 <li class="mobileLinks shellSign"><a href="signIn.html"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i></a></li>
-
             </ul>
-            <div class="header__Nav--Menuham">
-                <!-- Hamburguer menu icon or specific sections icons -->
-            </div>
         </nav>
     </header>
-    <main>
-        <section class="principal principalRegsig">
-            <!-- <h2 style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;">Que bueno verte otra vez !</h2> -->
-            <div id="loginContainer">
-                <form action="" class="signin__Form">
 
+    <div class="model1">
+        <div class="model2"></div>
+    </div class="model1">
 
-                    <label for="user">Usuario</label>
-                    <!-- <br> -->
-                    <input type="text" name="user" id="user" placeholder="Usuario">
+    <main class="principal principalRegsig">
+        <div id="loginContainer">
+            <form action="" class="signin__Form">
+                <label for="user">Usuario</label>
+                <input type="text" name="user" id="user" placeholder="Usuario">
 
-                    <!-- <br> -->
-                    <label for="password">Contraseña</label>
-                    <!-- <br> -->
-                    <input type="password" name="password" id="password" placeholder="Contraseña">
+                 <label for="password">Contraseña</label>
+                 <input type="password" name="password" id="password"placeholder="Contraseña">
 
-                    <div id="errorMsg">
+                <div id="errorMsg">
 
-                    </div>
-
-                    <div id="passwordRescue">
-
-                        <button type="button" id="btnUser">Login</button>
-                    </div>
-
-                </form>
-                
-            </div>
-            <div class="principalRegsig__View">
-                <h2 class="titles">Que bueno verte otra vez !</h2>
-                <div class="principalRegsig__View__Holder">
-                    <img src="signin.jpeg" alt="">
                 </div>
-            </div>
-        </section>
 
+                <div id="passwordRescue">
+
+                    <!-- Implementar Remeber y Forgot your password -->
+
+                    <button type="button" id="btnUser">Login</button>
+                </div>
+            </form>  
+        </div>
+        <div class="principalRegsig__View">
+            <h2 class="titles">Que bueno verte otra vez !</h2>
+            <div class="principalRegsig__View__Holder">
+                <img src="signin.jpeg" alt="">
+            </div>
+        </div>
     </main>
     <footer>
         <p class="credits" >Powered by <strong>Lucas Romero</strong></p>

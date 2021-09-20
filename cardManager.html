@@ -30,159 +30,121 @@
 
             </ul>
             <div class="header__Nav--User">
-                <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                <div class="iconBox">
+                    <i class="fa fa-2x fa-user-circle-o" aria-hidden="true"></i>
+                </div>
                 <p class="userProfile"></p>
                 <ul class="userMenu">
-                    <li>Salir</li>
+                    <li><a class="signOut" href="index.html">Salir</a></li>
                 </ul>
-                <!-- Hamburguer menu icon or specific sections icons -->
             </div>
         </nav>
     </header> 
-    
-    <main>
-        <!-- style="width: 100vw; height: 1800px; display: flex; flex-direction: column; justify-content: center; align-items: center;" id="main" -->
-        <section class="principal principalCardman">
-            <section class="cards" style="width: 100vw; display: flex; flex-direction: column; justify-content: center; border: 1px solid blue;" >
-                <h2 class="titles">Tarjetas</h2>
-                <!-- style="border-radius: 20px 100px 20px 100px;  width: 50vw; background: linear-gradient(33deg, rgba(235,255,111,1) 5%, rgba(255,178,111,1) 33%, rgba(218,88,59,1) 100%); text-align: center; line-height: 70px;" -->
-                <div style="display: flex; flex-direction: row; justify-content: center; border: 1px solid red;">
-                    <form action="" class="cards__Form" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
 
-                        <label>Tipo de tarjeta</label>
+    <div class="model1">
+        <div class="model2"></div>
+    </div class="model1">
 
-                        <br>
-                        <input type="radio" name="cardType" id="own" value="true">
-                        <label for="own">Propia</label>
-                        <br>
-                        <input type="radio" name="cardType" id="other" value="false">
-                        <label for="other">Tercero</label>
+    <main class="principal principalCardman">
+        <section class="cards">
+            <h2 class="titles">Tarjetas</h2>
+            <div class="cards__Container">
+                <form action="" class="cards__Form">
 
-                        <br>
+                    <label>Tipo de tarjeta</label>
 
+                    <input class="radio" type="radio" name="cardType" id="own" value="false">
+                    <label class="radioLabel" for="own">Propia</label>
+                    
+                    <input class="radio" type="radio" name="cardType" id="other"value="true">
+                    <label class="radioLabel" for="other">Tercero</label>
+
+                    <div class="thirdParty">
                         <label for="name">Nombre</label>
                         <br>
-                        <input type="text" name="name" id="name">
+                        <input type="text" name="name" id="name" placeholder="Nombre">
 
                         <br>
+
                         <label for="lastname">Apellido</label>
                         <br>
-                        <input type="text" name="lastname" id="lastname">
+                        <input type="text" name="lastname" id="lastname" placeholder="Apellido">
+                    </div>
 
-                        <div class="thirdParty">
-                            <!-- Aqui se tomaran los datos de tarjetas de terceros. Manipulación DOM según selección anterior -->
+                    <label for="lastNumbers">Terminación</label>
+                    <input type="number" name="lastNumbers" id="lastNumbers" placeholder="Terminación tarjeta">
 
-                        </div>
+                    <button type="button" id="btnCardsFac">Agregar tarjeta</button>
 
-                        <label for="lastNumbers">Terminación</label>
-                        <br>
-                        <input type="number" name="lastNumbers" id="lastNumbers">
-                        <br>
-                        <button type="button" id="btn" style="text-decoration: none; border: 1px solid gray; border-radius: 10px; padding: 10px; margin: 5px 0px; background-color: lightgray; color: white; font-family: sans-serif;">Agregar tarjeta</button>
+                </form>
+                <aside id="cards__Basket">
 
-                    
-
-                    </form>
-                    <aside id="cards__Basket" style="height: 450px; width: 500px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                        <p>No hay tarjetas registradas. Carga una tarjeta ! </p>
-
-                    </aside>
-                </div>
-            </section>
-        
-
-        
-
-            <section class="months">
-                <h2 class="titles">Calendario</h2>
-                <div style="display: flex; flex-direction: row; justify-content: center;">
-                    <form action="" class="months__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                        <label for="month">Mes de compra.</label>
-                        <br>
-                        <select name="month" id="month">
-                            <!-- <option value="1">Enero</option>
-                            <option value="2">Febrero</option>
-                            <option value="3">Marzo</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Mayo</option>
-                            <option value="6">Junio</option>
-                            <option value="7">Julio</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Septiembre</option>
-                            <option value="10">Octubre</option>
-                            <option value="11">Noviembre</option>
-                            <option value="12">Diciembre</option> -->
-                        </select>
-
-                        <br>
-                    
-                        <label for="clousure">Fecha de cierre de resumen.</label>
-                        <br>
-                        <input type="date" name="clousure" id="clousure">
-
-                        <br>
-            
-                        <label for="expiration">Fecha de vencimiento </label>
-                        <br>
-                        <input type="date" name="expiration" id="expiration">
-                    
-                    </form>
-                    <aside class="months__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                        <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
-
-                    </aside>
-                </div>
-            </section>
-
-            <section class="purchases">
-                <h2 class="titles">Compras</h2>
-                <div style="display: flex; flex-direction: row; justify-content: center;">
-                    <form action="" class="purchases__Form" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-
-
-                        <label for="amount">Monto de compra</label>
-                        <br>
-                        <input type="number" name="amount" id="amount">
-
-                        <br>
-
-                        <label for="payments">Cantidad de cuotas</label>
-                        <br>
-                        <input type="number" name="payments" id="payments">
-
-                        <br>
-
-                        <label for="cardSelector">Seleccione tarjeta</label>
-                        <select name="cardSelector" id="cardSelector">
-                            <!-- Aqui van las opciones de tarjetas que se agregarán en formulario tarjetas -->
-                        </select>
-
-                        <br>
-
-                        <input type="submit" value="Cargar">
-                    </form>
-                    <aside class="purchases__Basket" style="height: 350px; width: 250px; margin: 10px; border: 1px solid tomato; border-radius: 10px; padding: 20px;">
-                        <p>No tienes movimientos registrados. Realiza una compra ! </p>
-
-                    </aside>
-                </div>
-
-            </section>
+                </aside>
+            </div>
         </section>
 
+        <section class="months">
+            <h2 class="titles">Calendario</h2>
+            <div class="months__Container">
+                <form action="" class="months__Form">
+                    <label for="month">Mes de compra.</label>
+                    <select name="month" id="month">
+                            
+                    </select>
+
+                    <label for="clousure">Fecha de cierre de resumen.</label>
+                    <input type="date" name="clousure" id="clousure">
+
+                    <label for="expiration">Fecha de vencimiento </label>
+                    <input type="date" name="expiration" id="expiration">
+
+                    <button type="button" id="btnMonthsFac">Agregar mes</button>
+                    
+                </form>
+                <aside class="months__Basket">
+                    
+                </aside>
+            </div>
+        </section>
+
+        <section class="purchases">
+            <h2 class="titles">Compras</h2>
+            <div class="purchases__Container">
+                <form action="" class="purchases__Form">
+
+                    <label for="amount">Monto de compra</label>
+                    <input type="number" name="amount" id="amount" placeholder="Monto compra">
 
 
+                    <label for="payments">Cantidad de cuotas</label>
+                    <input type="number" name="payments" id="payments" placeholder="Cantidad cuotas">
 
 
-    </main> 
+                    <label for="cardSelector">Seleccione tarjeta</label>
+                    <select name="cardSelector" id="cardSelector">
+                        
+                    </select>
+
+                    <button type="button" id="btnPurchsFac">Agregar gasto</button>
+                </form>
+                <aside class="purchases__Basket">
+                    <p>Selecciona un mes y cargá tus compras !</p>
+
+                </aside>
+            </div>
+
+        </section>
+    </main>
+
     <footer>
         <p class="credits" >Powered by <strong>Lucas Romero</strong></p>
         <!-- <p class="collaborations">Img supplier <a class="credits__Anch" href="https://www.vecteezy.com/free-vector/human" title="Human Vectors by Vecteezy">Vecteezy</a></p> -->
     </footer>
+
     <script src="https://use.fontawesome.com/03d061c738.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script src="cardManager.js"></script>
-    
 </body>
 </html>

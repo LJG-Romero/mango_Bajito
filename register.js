@@ -1,22 +1,3 @@
-                        /* Remaining taks */
-
-    // Falta desarrollo de chequeo de disponibilidad de nombre de usuario en tiempo real. ******** CHECK
-    // Falta input de email.
-    // Falta agregarle ID al constructor Register. ******** CHECK
-    // Falta acomodar ID una vez que regrese a Register 
-    // Falta desarrollar chequeo de campos obligatorios.
-    // Falta desarrollar que la edad sea +18.
-    // Falta desarrollo de personalización input de pass cuando no se cumple la condicion con CSS.
-    // Falta desarrollo para chequear formato de tipos de caracteres para contraseña e email.
-    // Falta desarrollo checkbox y algoritmo para personalizar mensaje de bienvenida por género.
-    // Falta implementar asinc o similar para transción entre windows.
-    // Falta implementar import y export para reutilizar atributos de los usuarios para las tarjetas de cardManager.
-    // Falta imlementar funciones donde se repiten tareas y reutilizarlas con import y export.
-
-    // Falta desarrollar css.
-    // Falta implementar efectos btns.
-    // Falta implementar los vector ilustrations.
-
 class Register{
     constructor(nombre, apellido, fechaDeNacimiento, usuario, contraseña, id){
         this.nombre = nombre;
@@ -26,11 +7,6 @@ class Register{
         this.contraseña = contraseña;
         this.id = id;
     }
-        /* Class method example */
-    // saludar(nombre){
-    //     alert("Bienvenido " + this.nombre + " !");
-
-    // }
 } 
 
 let passCheck = false;
@@ -59,24 +35,17 @@ function nameValidation(){
             if(userValidation.value == users.usuario){
                 //console.log("coinciden")
                 node.innerHTML = "";
-                // element.innerHTML = `<p class="error">Ups ! ${userValidation.value} no está 
-                //                     disponible.</p>`
                 node.innerHTML = `<p class="error">Ups ! ${userValidation.value} no está 
                                     disponible.</p>`
                                     
-                                    // Intenta otra vez, mango${userValidation.value} no suena 
-                                    // tan mal no? ... Mi programador se cree con mucho 'humor' ${String.
-                                    // fromCodePoint(0x1F612)}`
-                // node.appendChild(element);
                 document.getElementById("btnUser").setAttribute("disabled", true);
                 break;
             }
             else if (userValidation.value != users.usuario){
                 //console.log("o entra por aca")
                 node.innerHTML = "";
-                // element.innerHTML = `${userValidation.value} se oye bien. Sigamos !`
                 node.innerHTML = `<p class="success">${userValidation.value} se oye bien. Sigamos !</p>`
-                // node.appendChild(element);
+            
                 document.getElementById("btnUser").removeAttribute("disabled");
                 if(userValidation.value == ""){
                     node.innerHTML = "";
@@ -111,7 +80,6 @@ function usersFactory(e){
         passwordCheck = document.getElementById("passwordCheck").value;
 
     if(password === passwordCheck && name != "" && lastname != "" && bird != "" && user != "" && password != "" && passwordCheck != ""){
-        // (password = passwordCheck != "") && user != "" Esta versión mas corta no funcionó. Pass almacena true ! 
         //console.log("Funciona checkeo campos");
         
             /* Bloque a refactorizar con una función */
@@ -153,7 +121,7 @@ function usersFactory(e){
             
         // })
 
-        e.preventDefault(); // Provisorio para poder realizar el redireccionamiento a sección SingIn
+        e.preventDefault();
 
         setTimeout(function redirection(){
             alert("Creación de usuario exitoso");
@@ -200,35 +168,3 @@ function usersFactory(e){
         }
     }
 }
-
-
-
-                                /* Algoritmo IMPERATIVO inicial */
-
-// nombre = prompt("Ingrese su Nombre: ");
-// apellido = prompt("Ingrese su Apellido: ");
-// fechaDeNacimiento = prompt("Ingrese su fecha de nacimiento en formato dd/mm/aaaa: ");
-// usuario = prompt("Ingrese su Usuario: ");
-// alert("Gracias por sus datos");
-
-// do{
-//     contraseña = prompt("Ingrese su Contraseña: ");
-//     repetirContraseña = prompt("Repita la contraseña: ");
-//     if(contraseña === repetirContraseña){
-//         const Usuario = new Register (nombre, apellido, fechaDeNacimiento, usuario , contraseña);
-//         alert("Creación de usuario exitoso");
-
-//         contenedor = document.createElement("main");
-//         contenedor.innerHTML = `<h1 style="color:tomato; font-size: 50px; text-align:center;"> 
-//                                 Bienvenido ${Usuario.usuario} ! </h1>`;
-//         document.body.appendChild(contenedor);
-
-
-//         //Usuario.saludar();  
-//         console.log(Usuario);
-//     }
-//     else{
-//         alert("La verifiación de la contraseña no concuerda"); 
-//     }    
-// }
-// while(contraseña != repetirContraseña);
