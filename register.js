@@ -1,3 +1,15 @@
+/*** View - UI ***/  
+let input = document.getElementsByName('bird')[0];
+input.addEventListener("focus", changeType);
+function changeType(){
+    input.setAttribute("type","date");
+}
+input.addEventListener("focusout", restoreType);
+function restoreType(){
+    input.setAttribute("type","text");
+}
+
+/*** Model ***/  
 class Register{
     constructor(nombre, apellido, fechaDeNacimiento, usuario, contraseña, id){
         this.nombre = nombre;
@@ -9,6 +21,7 @@ class Register{
     }
 } 
 
+/*** Controller ***/  
 let passCheck = false;
 
 /* Live validation of user name availability  */

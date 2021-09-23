@@ -32,6 +32,7 @@
     --titles: tomato;
     --paragraphs: lightsalmon;
     --strongs: rgba(218,88,59,1);
+    --cardsBackground: rgba(255,178,111,1);
 }
 
 /*** Animates ***/
@@ -414,7 +415,7 @@ input::placeholder{
 }
     /* .signin__Form input::placeholder{
         color: var(--paragraphs);
-    } */    
+    } */   
 input::-webkit-calendar-picker-indicator{
     display: none;
 }
@@ -457,7 +458,8 @@ input::-webkit-calendar-picker-indicator{
         /** Section Card Manager **/
 .principalCardman{
     display: block;
-    height: 1750px;
+    height: 1550px;
+    top: 85px;
 }
 .radio{
     width: 50px;
@@ -476,7 +478,8 @@ input::-webkit-calendar-picker-indicator{
 .cardsUser{
     width: 262.5px;
     height: 150px;
-    background: var(--paragraphs);
+    /* background: var(--paragraphs); */
+    background: var(--cardsBackground);
     box-shadow: 0px 1px 5px var(--titles);
     border-radius: 10px;
     display: flex;
@@ -484,7 +487,6 @@ input::-webkit-calendar-picker-indicator{
     justify-content: space-between;
     align-items: center;
     margin: 10px;
-
 }
 .cardsUser__Edges{
     height: 50px;
@@ -492,52 +494,65 @@ input::-webkit-calendar-picker-indicator{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+.cardsMonth, .cardsPurch{
+    height: 80px;
+    width: 290px;
+    box-shadow: 0px 1px 5px var(--strongs);
+    background: var(--cardsBackground);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+.cardsMonth__Container, .cardsPurch__Container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--secondary);
 }
 .cardsUser p{
     color: var(--strongs);
 }
+.cardsP{
+    text-align: left;
+    margin: 3px;
+    color: var(--strongs);
+}
 .remove i{
     color: var(--linksNav);
+    border: 1px solid var(--tertiary);
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
-.cardsMonth{
-    box-shadow: 0px 1px 5px var(--strongs);
-    height: 70px;
-    width: 180px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px;
+.remove i:hover{
+    color: var(--linksNavHover);
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
-.cardsMonth p{
-    text-align: left;
-    padding-left: 5px;
-    color: var(--strongs);
-}
-.cardsPurch{
-    box-shadow: 0px 1px 5px var(--strongs);
-    height: 100px;
-    width: 270px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px;
-
-}
-.cardsPurch p{
-    text-align: left;
-    padding-left: 5px;
-    color: var(--strongs);
+.remove{
+    border: 1px solid var(--secondary);
+    /* margin-top: 2px; */
+    /* margin-right: 1px; */
 }
 #btnCardsFac, #btnMonthsFac, #btnPurchsFac{
     width: 150px;
     height: 30px;
     border: none;
+    color: var(--strongs);
     box-shadow: 0px 0px 5px var(--strongs);
     background: var(--regBtn-background);
     border-radius: 10px;
     text-align: center;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+#btnCardsFac:hover, #btnMonthsFac:hover, #btnPurchsFac:hover{
+    color: var(--linksNavHover);
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
 .cards, .months, .purchases{
     display: flex;
@@ -554,7 +569,8 @@ input::-webkit-calendar-picker-indicator{
 .cards__Form, #cards__Basket, .months__Form, .months__Basket, .purchases__Form, .purchases__Basket{
     width: 400px;
     height: 400px;
-    border: 1px solid var(--strongs);
+    /* border: 1px solid var(--strongs); */
+    box-shadow: 0px 1px 5px var(--strongs);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -567,6 +583,16 @@ input::-webkit-calendar-picker-indicator{
 }
 .principalCardman select{
     margin: 10px;
+}
+select{
+    text-align-last: center;
+}
+/* input:-internal-autofill-selected{
+    color: red !important;
+} */
+input:-webkit-autofill{
+    -webkit-text-fill-color: var(--paragraphs);
+    /* -webkit-background-color: white; */
 }
 
 /*** Footer ***/
@@ -679,6 +705,11 @@ footer{
         justify-content: space-evenly;
         align-items: center; 
         border-radius: 190px 0px 0px 0px;
+    }
+    .principalCardman{
+        display: block;
+        height: 1550px;
+        top: 125px;
     }
     .principal__Img{
         height: 370px;
@@ -808,6 +839,11 @@ footer{
         align-items: center; 
         border-radius: 190px 0px 0px 0px;
     }
+    .principalCardman{
+        display: block;
+        height: 1550px;
+        top: 125px;
+    }
     .principal__Img{
         height: 370px;
         width: 640px;
@@ -870,6 +906,11 @@ footer{
         justify-content: space-evenly;
         align-items: center; 
         border-radius: 190px 0px 0px 0px;
+    }
+    .principalCardman{
+        display: block;
+        height: 1550px;
+        top: 125px;
     }
     .principal__Img{
         height: 370px;

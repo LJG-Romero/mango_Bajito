@@ -33,15 +33,15 @@ $('.iconBox').on('click',function iconAnimate(){
     $('.iconBox i').toggleClass('fa-user-circle-o fa-times').css({
         'transform':'rotate(360deg)',
         'transition':'2s'
-    
     });
     $('.userProfile').toggle(700);
     $('.userMenu').toggle(700);
     setTimeout(function delay(){
         $('.iconBox i').removeAttr('style');
-
     },2000);
 });
+
+    /** Sign out **/
 $('.signOut').on('click',function userLogout(){
     sessionStorage.removeItem("userCondition");
     sessionStorage.removeItem("userId");
@@ -74,6 +74,10 @@ $('.radio').on('click', function radioChecked(){
         $('.thirdParty').hide();
     }
 })
+
+// $('.radio').focusout(function restoreStatus(){
+//     $('.thirdParty').hide();
+// })
 
 let cardsContainerLocal = localStorage.getItem("arrayCards");
 let cardsContainer = JSON.parse(cardsContainerLocal);
@@ -116,6 +120,19 @@ else {
 }
 
     /** Months Factory UI **/
+$("input[name='expiration']").focus(function changeType(){
+    $("input[name='expiration']").attr('type','date');
+})
+$("input[name='expiration']").focusout(function restoreType(){
+    $("input[name='expiration']").attr('type','text');
+})
+$("input[name='clousure']").focus(function changeType(){
+    $("input[name='clousure']").attr('type','date');
+})
+$("input[name='clousure']").focusout(function restoreType(){
+    $("input[name='clousure']").attr('type','text');
+})
+
 let monthsContainerLocal = localStorage.getItem("arrayMonths");
 let monthsContainer = JSON.parse(monthsContainerLocal);
 
@@ -129,10 +146,15 @@ if(monthsContainer == null){
 else{
     for (const months of monthsContainer) {
         $('.months__Basket').append(`
-            <div class=cardsMonth>
-                <p>Mes: ${months.mes}</p>
-                <p>Vencimiento: ${months.fechaVencimiento}</p>
-                <p>Cierre: ${months.fechaCierre}</p>
+            <div class=cardsMonth id=${months.mes}>
+                <div class="cardsMonth__Container">
+                    <p class="cardsP">Mes: ${months.mes}</p>
+                    <p class="cardsP">Cierre: ${months.fechaCierre}</p>
+                    <p class="cardsP">Vencimiento: ${months.fechaVencimiento}</p>
+                </div>
+                <div class="remove" >
+                    <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                </div>
             </div>
         `)
     }
@@ -140,10 +162,28 @@ else{
 
     /** Purchases Factory UI **/
 $('.cardsMonth').on('click', function monthSelected(){
-    // console.log("funciona")
-    const purchasesContainer = monthsContainer[0].compras;
+    let cardsSection = $('.cardsMonth');
+        for (const card of cardsSection ) {
+            $('.cardsMonth').removeAttr('style');
+            $('.cardsMonth').find('i').removeAttr('style');
+        }
+    
+    $(this).css({
+        'background':'var(--linksNav)',
+        'box-shadow':'0px 1px 5px var(--strongs)'
+    });
+    $(this).find('i').css({
+        'color':'var(--linksNavHover)'
+    })
+
+    
+    cardSelection = $(this).attr('id');
+    // console.log(cardSelection)
+    let monthSelection = monthsContainer.find(month => month.mes == cardSelection);
+    // console.log(monthSelection);
+    const purchasesContainer = monthSelection.compras;
     // console.log(purchasesContainer)
-    // let monthSelected = $(this).mes
+    
     if (purchasesContainer == ""){
         $('.purchases__Basket').html("");
         $('.purchases__Basket').append(`
@@ -155,9 +195,14 @@ $('.cardsMonth').on('click', function monthSelected(){
         for (const purch of purchasesContainer) {
             $('.purchases__Basket').append(`
                 <div class=cardsPurch>
-                    <p>Monto: ${purch.monto}</p>
-                    <p>Cuotas: ${purch.cuotas}</p>
-                    <p>Tarjeta: ${purch.tarjetas}</p>
+                    <div class="cardsPurch__Container">
+                        <p class="cardsP">Monto: ${purch.monto}</p>
+                        <p class="cardsP">Cuotas: ${purch.cuotas}</p>
+                        <p class="cardsP">Tarjeta: ${purch.tarjetas}</p>
+                    </div>
+                    <div class="remove" >
+                        <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                    </div>
                 </div>
             `)
         }
@@ -194,6 +239,8 @@ class Purchases{
 
 
 /*** Controller ***/
+let cardSelection;
+
     /** Cards Factory **/
 let card = document.getElementById("btnCardsFac");
 card.addEventListener ("click", cardsFactory);
@@ -246,6 +293,9 @@ function cardsFactory() {
             <option>${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}</option>
     `)
     }
+    if (userType){
+        $('.thirdParty').hide();
+    }
 }
 
     /** Months Factory **/
@@ -265,46 +315,124 @@ $('#btnMonthsFac').on('click', function monthFactory(){
     $('.months__Basket').html("");
     for (const months of monthsContainer) {
         $('.months__Basket').append(`
-            <div class=cardsMonth>
-                <p>Mes: ${months.mes}</p>
-                <p>Vencimiento: ${months.fechaVencimiento}</p>
-                <p>Cierre: ${months.fechaCierre}</p>
+            <div class=cardsMonth id=${months.mes}>
+                <div class="cardsMonth__Container">
+                    <p class="cardsP">Mes: ${months.mes}</p>
+                    <p class="cardsP">Cierre: ${months.fechaCierre}</p>
+                    <p class="cardsP">Vencimiento: ${months.fechaVencimiento}</p>
+                </div>
+                <div class="remove" >
+                    <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                </div>
             </div>
         `)
-    }
+    }  
+
+    $('.purchases__Basket').html("").append(`
+        <p>Selecciona un mes y cargá tus compras !</p>
+    `)
     
+    $('.cardsMonth').on('click', function monthSelected(){
+        let cardsSection = $('.cardsMonth');
+        for (const card of cardsSection ) {
+            $('.cardsMonth').removeAttr('style');
+            $('.cardsMonth').find('i').removeAttr('style');
+        }
+        
+        $(this).css({
+            'background':'var(--linksNav)',
+            'box-shadow':'0px 1px 5px var(--strongs)'
+        });
+        $(this).find('i').css({
+            'color':'var(--linksNavHover)'
+        })
+        // $(this).find('i').hover(function(){
+        //     $(this).css({
+        //         'color':'var(--cardsBackground)'});
+        //     }, function(){
+        //         $(this).css({'color':'var(--linksNavHover'})
+        // });
+
+
+        // console.log(cardSelection)
+        cardSelection = $(this).attr('id');
+        // console.log(cardSelection)
+        let monthSelection = monthsContainer.find(month => month.mes == cardSelection);
+        // console.log(monthSelection);
+        const purchasesContainer = monthSelection.compras;
+        // console.log(purchasesContainer)
+        
+        if (purchasesContainer == ""){
+            $('.purchases__Basket').html("");
+            $('.purchases__Basket').append(`
+                <p>No tienes movimientos registrados. Realiza una compra !</p>
+            `)
+        }
+        else{
+            $('.purchases__Basket').html("");
+            for (const purch of purchasesContainer) {
+                $('.purchases__Basket').append(`
+                    <div class=cardsPurch>
+                        <div class="cardsPurch__Container">
+                            <p class="cardsP">Monto: ${purch.monto}</p>
+                            <p class="cardsP">Cuotas: ${purch.cuotas}</p>
+                            <p class="cardsP">Tarjeta: ${purch.tarjetas}</p>
+                        </div>
+                        <div class="remove" >
+                            <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                `)
+            }
+        }
+    })
 })
 
     /** Purchases Factory **/
 $('#btnPurchsFac').on('click', function purchFactory(){
-
-    const purchasesContainer = monthsContainer[0].compras;
-    // console.log(monthsContainer);
-    // console.log(purchasesContainer);
-
-    let amount = $('#amount').val();
-    let payments = $('#payments').val();
-    let cardSelector = $('#cardSelector').val();
-
-    purchasesContainer.push(new Purchases(amount, payments, cardSelector));
-    // console.log(purchasesContainer);
-
-    monthsContainer[0].compras = purchasesContainer;
-    // console.log(monthsContainer);
-
-    monthsContainerLocal = JSON.stringify(monthsContainer);
-    localStorage.setItem("arrayMonths", monthsContainerLocal);
-
-    $('.purchases__Basket').html("");
-    for (const purch of purchasesContainer) {
-        $('.purchases__Basket').append(`
-            <div class=cardsPurch>
-                <p>Monto: ${purch.monto}</p>
-                <p>Cuotas: ${purch.cuotas}</p>
-                <p>Tarjeta: ${purch.tarjetas}</p>
-            </div>
-        `)
+    if(cardSelection == undefined){
+        alert('Ups, no tan rápido. Primero seleccioná un mes !');
     }
+    else{
+        let monthSelection = monthsContainer.find(month => month.mes == cardSelection);
+        let monthSelectionIndex = monthsContainer.indexOf(monthSelection);
+        console.log(monthsContainer);
+        console.log(monthSelection);
+        console.log(monthSelectionIndex);
+
+        const purchasesContainer = monthSelection.compras;
+        console.log(purchasesContainer)
+
+        let amount = $('#amount').val();
+        let payments = $('#payments').val();
+        let cardSelector = $('#cardSelector').val();
+
+        purchasesContainer.push(new Purchases(amount, payments, cardSelector));
+        console.log(purchasesContainer);
+
+        monthSelection.compras = purchasesContainer;
+        monthsContainer[monthSelectionIndex] = monthSelection;
+        console.log(monthsContainer);
+
+        monthsContainerLocal = JSON.stringify(monthsContainer);
+        localStorage.setItem("arrayMonths", monthsContainerLocal);
+
+        $('.purchases__Basket').html("");
+        for (const purch of purchasesContainer) {
+            $('.purchases__Basket').append(`
+                <div class=cardsPurch>
+                    <div class="cardsPurch__Container">
+                        <p class="cardsP">Monto: ${purch.monto}</p>
+                        <p class="cardsP">Cuotas: ${purch.cuotas}</p>
+                        <p class="cardsP">Tarjeta: ${purch.tarjetas}</p>
+                    </div>
+                    <div class="remove" >
+                        <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                    </div>
+                </div>
+            `)
+        }
+    } 
 })
 
 

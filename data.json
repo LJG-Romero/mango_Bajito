@@ -1,50 +1,50 @@
 [
     {
         "month" : "Enero",
-        "value" : 1
+        "value" : "Enero"
     },
     {
         "month" : "Febrero",
-        "value" : 2
+        "value" : "Febrero"
     },
     {
         "month" : "Marzo",
-        "value" : 3
+        "value" : "Marzo"
     },
     {
         "month" : "Abril",
-        "value" : 4
+        "value" : "Abril"
     },
     {
         "month" : "Mayo",
-        "value" : 5
+        "value" : "Mayo"
     },
     {
         "month" : "Junio",
-        "value" : 6
+        "value" : "Junio"
     },
     {
         "month" : "Julio",
-        "value" : 7
+        "value" : "Julio"
     },
     {
         "month" : "Agosto",
-        "value" : 8
+        "value" : "Agosto"
     },
     {
         "month" : "Septiembre",
-        "value" : 9
+        "value" : "Septiembre"
     },
     {
         "month" : "Octubre",
-        "value" : 10
+        "value" : "Octubre"
     },
     {
         "month" : "Noviembre",
-        "value" : 11
+        "value" : "Noviembre"
     },
     {
         "month" : "Diciembre",
-        "value" : 12
+        "value" : "Diciembre"
     }
 ]
