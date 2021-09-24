@@ -1,5 +1,5 @@
 /*** View - UI ***/
-    /** Navbar User Logged**/
+    /** Navbar user logged**/
 let userState = sessionStorage.getItem("userCondition");
 let userIdLog = sessionStorage.getItem("userId");
 
@@ -28,7 +28,7 @@ if (userState) {
     $('.userProfile').append(`Hola ${nameUserLog} !`);
 }
 
-    /** User Menu Animation **/
+    /** User menu animation **/
 $('.iconBox').on('click',function iconAnimate(){
     $('.iconBox i').toggleClass('fa-user-circle-o fa-times').css({
         'transform':'rotate(360deg)',
@@ -63,7 +63,8 @@ $.ajax({
     }
 })
 
-    /** Cards Factory UI **/
+    /** Factories UI **/
+        /** User type **/
 $('.radio').on('click', function radioChecked(){
     let userType = $("input[name='cardType']:checked").val();
     console.log(userType);
@@ -75,10 +76,26 @@ $('.radio').on('click', function radioChecked(){
     }
 })
 
+        /** Alt driver "third party" section **/
 // $('.radio').focusout(function restoreStatus(){
 //     $('.thirdParty').hide();
 // })
 
+        /** Input date - text type **/
+$("input[name='expiration']").focus(function changeType(){
+    $("input[name='expiration']").attr('type','date');
+})
+$("input[name='expiration']").focusout(function restoreType(){
+    $("input[name='expiration']").attr('type','text');
+})
+$("input[name='clousure']").focus(function changeType(){
+    $("input[name='clousure']").attr('type','date');
+})
+$("input[name='clousure']").focusout(function restoreType(){
+    $("input[name='clousure']").attr('type','text');
+})
+
+    /** Rendering "Cards" UI **/
 let cardsContainerLocal = localStorage.getItem("arrayCards");
 let cardsContainer = JSON.parse(cardsContainerLocal);
 
@@ -115,24 +132,11 @@ else {
         `)
         $('#cardSelector').append(`
             <option>${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}</option>
-    `)
+        `)
     }
 }
 
-    /** Months Factory UI **/
-$("input[name='expiration']").focus(function changeType(){
-    $("input[name='expiration']").attr('type','date');
-})
-$("input[name='expiration']").focusout(function restoreType(){
-    $("input[name='expiration']").attr('type','text');
-})
-$("input[name='clousure']").focus(function changeType(){
-    $("input[name='clousure']").attr('type','date');
-})
-$("input[name='clousure']").focusout(function restoreType(){
-    $("input[name='clousure']").attr('type','text');
-})
-
+    /** Rendering "Months" UI **/
 let monthsContainerLocal = localStorage.getItem("arrayMonths");
 let monthsContainer = JSON.parse(monthsContainerLocal);
 
@@ -160,23 +164,27 @@ else{
     }
 }
 
-    /** Purchases Factory UI **/
+    /** Rendering "Purchases" UI **/
 $('.cardsMonth').on('click', function monthSelected(){
     let cardsSection = $('.cardsMonth');
-        for (const card of cardsSection ) {
-            $('.cardsMonth').removeAttr('style');
-            $('.cardsMonth').find('i').removeAttr('style');
-        }
-    
+    for (const card of cardsSection ) {
+        $('.cardsMonth').removeAttr('style');
+        $('.cardsMonth').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+    }
+        
     $(this).css({
         'background':'var(--linksNav)',
         'box-shadow':'0px 1px 5px var(--strongs)'
     });
     $(this).find('i').css({
         'color':'var(--linksNavHover)'
-    })
+    }).hover(function(){
+        $(this).css({
+            'color':'var(--cardsBackground)'});
+        }, function(){
+            $(this).css({'color':'var(--linksNavHover'})
+    });
 
-    
     cardSelection = $(this).attr('id');
     // console.log(cardSelection)
     let monthSelection = monthsContainer.find(month => month.mes == cardSelection);
@@ -184,7 +192,7 @@ $('.cardsMonth').on('click', function monthSelected(){
     const purchasesContainer = monthSelection.compras;
     // console.log(purchasesContainer)
     
-    if (purchasesContainer == ""){
+    if (purchasesContainer == []){
         $('.purchases__Basket').html("");
         $('.purchases__Basket').append(`
             <p>No tienes movimientos registrados. Realiza una compra !</p>
@@ -207,6 +215,61 @@ $('.cardsMonth').on('click', function monthSelected(){
             `)
         }
     }
+        /** Remove Cards Month **/
+    $('.remove').unbind('click')
+    $(this).find('.remove').on('click', function removeCardsMonth(){
+        // $('.remove').on('click', function removeCardsMonth(){
+        console.log(i)
+        i++;
+        console.log(cardSelection)
+        $(this).parent().remove();
+
+        console.log(monthsContainer)
+        console.log(monthSelection)
+        let monthSelectionIndex = monthsContainer.indexOf(monthSelection);
+
+        console.log(monthSelectionIndex);
+
+        let temp = monthsContainer.splice(monthSelectionIndex,1)
+        console.log(monthsContainer)
+        console.log(temp)
+
+        monthsContainerLocal = JSON.stringify(monthsContainer);
+        localStorage.setItem("arrayMonths", monthsContainerLocal);
+        
+        $('.purchases__Basket').html("").append(`
+            <p>Selecciona un mes y cargá tus compras !</p>
+        `)
+        cardSelection = undefined;
+    })
+})
+
+    /** Remove Cards Month **/
+$('.remove').unbind('click')
+$(this).find('.remove').on('click', function removeCardsMonth(){
+    // $('.remove').on('click', function removeCardsMonth(){
+    console.log(i)
+    i++;
+    console.log(cardSelection)
+    $(this).parent().remove();
+
+    console.log(monthsContainer)
+    console.log(monthSelection)
+    let monthSelectionIndex = monthsContainer.indexOf(monthSelection);
+
+    console.log(monthSelectionIndex);
+
+    let temp = monthsContainer.splice(monthSelectionIndex,1)
+    console.log(monthsContainer)
+    console.log(temp)
+
+    monthsContainerLocal = JSON.stringify(monthsContainer);
+    localStorage.setItem("arrayMonths", monthsContainerLocal);
+    
+    $('.purchases__Basket').html("").append(`
+        <p>Selecciona un mes y cargá tus compras !</p>
+    `)
+    cardSelection = undefined;
 })
 
 
@@ -240,6 +303,8 @@ class Purchases{
 
 /*** Controller ***/
 let cardSelection;
+let i = 1;
+
 
     /** Cards Factory **/
 let card = document.getElementById("btnCardsFac");
@@ -331,12 +396,16 @@ $('#btnMonthsFac').on('click', function monthFactory(){
     $('.purchases__Basket').html("").append(`
         <p>Selecciona un mes y cargá tus compras !</p>
     `)
-    
+    console.log(cardSelection);
+    cardSelection = undefined;
+    console.log(cardSelection);
+
+        /** Months Selection **/
     $('.cardsMonth').on('click', function monthSelected(){
         let cardsSection = $('.cardsMonth');
         for (const card of cardsSection ) {
             $('.cardsMonth').removeAttr('style');
-            $('.cardsMonth').find('i').removeAttr('style');
+            $('.cardsMonth').find('i').removeAttr('style').unbind('mouseenter mouseleave');
         }
         
         $(this).css({
@@ -345,14 +414,13 @@ $('#btnMonthsFac').on('click', function monthFactory(){
         });
         $(this).find('i').css({
             'color':'var(--linksNavHover)'
-        })
-        // $(this).find('i').hover(function(){
-        //     $(this).css({
-        //         'color':'var(--cardsBackground)'});
-        //     }, function(){
-        //         $(this).css({'color':'var(--linksNavHover'})
-        // });
-
+        }).hover(function(){
+            $(this).css({
+                'color':'var(--cardsBackground)'});
+            }, function(){
+                $(this).css({'color':'var(--linksNavHover'})
+        });
+        
 
         // console.log(cardSelection)
         cardSelection = $(this).attr('id');
@@ -362,7 +430,7 @@ $('#btnMonthsFac').on('click', function monthFactory(){
         const purchasesContainer = monthSelection.compras;
         // console.log(purchasesContainer)
         
-        if (purchasesContainer == ""){
+        if (purchasesContainer == []){
             $('.purchases__Basket').html("");
             $('.purchases__Basket').append(`
                 <p>No tienes movimientos registrados. Realiza una compra !</p>
@@ -385,6 +453,33 @@ $('#btnMonthsFac').on('click', function monthFactory(){
                 `)
             }
         }
+        /** Remove Cards Month **/
+        $('.remove').unbind('click')
+        $(this).find('.remove').on('click', function removeCardsMonth(){
+            // $('.remove').on('click', function removeCardsMonth(){
+            console.log(i)
+            i++;
+            console.log(cardSelection)
+            $(this).parent().remove();
+
+            console.log(monthsContainer)
+            console.log(monthSelection)
+            let monthSelectionIndex = monthsContainer.indexOf(monthSelection);
+
+            console.log(monthSelectionIndex);
+
+            let temp = monthsContainer.splice(monthSelectionIndex,1)
+            console.log(monthsContainer)
+            console.log(temp)
+
+            monthsContainerLocal = JSON.stringify(monthsContainer);
+            localStorage.setItem("arrayMonths", monthsContainerLocal);
+            
+            $('.purchases__Basket').html("").append(`
+                <p>Selecciona un mes y cargá tus compras !</p>
+            `)
+            cardSelection = undefined;
+        })
     })
 })
 
@@ -434,6 +529,3 @@ $('#btnPurchsFac').on('click', function purchFactory(){
         }
     } 
 })
-
-
-

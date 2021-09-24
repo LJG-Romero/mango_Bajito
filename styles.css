@@ -537,6 +537,12 @@ input::-webkit-calendar-picker-indicator{
     /* margin-top: 2px; */
     /* margin-right: 1px; */
 }
+/* .removeSelect i{
+    color: var(--linksNavHover);
+} */
+/* .removeSelect:hover i{
+    color: var(--cardsBackground)
+} */
 #btnCardsFac, #btnMonthsFac, #btnPurchsFac{
     width: 150px;
     height: 30px;
