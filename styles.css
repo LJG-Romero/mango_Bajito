@@ -522,17 +522,18 @@ input::-webkit-calendar-picker-indicator{
     color: var(--strongs);
 }
 .remove i{
-    color: var(--linksNav);
+    /* color: var(--linksNav); */
     border: 1px solid var(--tertiary);
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
 }
 .remove i:hover{
-    color: var(--linksNavHover);
+    /* color: var(--linksNavHover); */
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
 }
 .remove{
+    display: none;
     border: 1px solid var(--secondary);
     /* margin-top: 2px; */
     /* margin-right: 1px; */
@@ -583,7 +584,12 @@ input::-webkit-calendar-picker-indicator{
     justify-content: center;
     align-items: center;
     margin: 10px;
+    overflow: scroll;
+    scroll-behavior: smooth;
 }
+/* .cardsUser{
+    position: absolute;
+} */
 .principalCardman input{
     margin: 10px;
 }

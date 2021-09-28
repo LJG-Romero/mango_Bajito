@@ -113,9 +113,17 @@ else {
     $('#cardSelector').append(`
             <option selected disabled>Seleccione su tarjeta</option>
     `)
+
+    if(cardsContainer.length >= 2){
+        console.log(cardsContainer.length)
+        $('#cards__Basket').css({
+            'justify-content':'flex-start'
+        })
+    }
+
     for (const cards of cardsContainer) {
         $('#cards__Basket').append(`
-            <div class="cardsUser">
+            <div class="cardsUser" style="display:none">
                 <div class="cardsUser__Edges">
                     <h3>Visa</h3>
                     <div class="remove" >
@@ -130,27 +138,66 @@ else {
                 </div>
             </div>
         `)
+        $('.cardsUser').slideDown("slow");
+
         $('#cardSelector').append(`
             <option>${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}</option>
         `)
     }
 }
+$('.cardsUser').on('click', function cardUserSelected(){
+    $('.cardsUser').find('.remove').hide();
+    $(this).find('.remove').show();
+    let cardsSection = $('.cardsUser');
+    for (const card of cardsSection ) {
+        $('.cardsUser').removeAttr('style');
+        $('.cardsUser').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+    }
+    
+    $(this).css({
+        'background':'var(--linksNav)',
+        'box-shadow':'0px 1px 5px var(--strongs)'
+    });
+    $(this).find('i').css({
+        'color':'var(--cardsBackground)'
+    }).hover(function(){
+        $(this).css({
+            'color':'var(--linksNavHover)'});
+        }, function(){
+            $(this).css({'color':'var(--cardsBackground'})
+    });
+})
 
     /** Rendering "Months" UI **/
 let monthsContainerLocal = localStorage.getItem("arrayMonths");
 let monthsContainer = JSON.parse(monthsContainerLocal);
 
-if(monthsContainer == null){
+if (monthsContainer.length <=4){
+    $('.purchases__Basket').removeAttr('style');
+}
+else if(monthsContainer.length > 4){
+    console.log('entro por aca')
+    $('.months__Basket').css({
+        'justify-content':'flex-start'
+    })
+}
+
+if(monthsContainer == null ){
     monthsContainerLocal = "";
     monthsContainer = [];
     $('.months__Basket').append(`
             <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
     `)
 }
+else if (monthsContainer == ""){
+    $('.months__Basket').append(`
+        <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
+    `)
+}
 else{
     for (const months of monthsContainer) {
         $('.months__Basket').append(`
-            <div class=cardsMonth id=${months.mes}>
+            <div class=cardsMonth id=${months.mes} style="display:none">
                 <div class="cardsMonth__Container">
                     <p class="cardsP">Mes: ${months.mes}</p>
                     <p class="cardsP">Cierre: ${months.fechaCierre}</p>
@@ -161,11 +208,12 @@ else{
                 </div>
             </div>
         `)
+        $('.cardsMonth').slideDown("slow");
     }
 }
-
-    /** Rendering "Purchases" UI **/
 $('.cardsMonth').on('click', function monthSelected(){
+    $('.cardsMonth').find('.remove').hide();
+    $(this).find('.remove').show();
     let cardsSection = $('.cardsMonth');
     for (const card of cardsSection ) {
         $('.cardsMonth').removeAttr('style');
@@ -177,22 +225,32 @@ $('.cardsMonth').on('click', function monthSelected(){
         'box-shadow':'0px 1px 5px var(--strongs)'
     });
     $(this).find('i').css({
-        'color':'var(--linksNavHover)'
+        'color':'var(--cardsBackground)'
     }).hover(function(){
         $(this).css({
-            'color':'var(--cardsBackground)'});
+            'color':'var(--linksNavHover)'});
         }, function(){
-            $(this).css({'color':'var(--linksNavHover'})
+            $(this).css({'color':'var(--cardsBackground'})
     });
 
+    /** Rendering "Purchases" UI **/
     cardSelection = $(this).attr('id');
     // console.log(cardSelection)
     let monthSelection = monthsContainer.find(month => month.mes == cardSelection);
     // console.log(monthSelection);
     const purchasesContainer = monthSelection.compras;
     // console.log(purchasesContainer)
+
+    if (purchasesContainer.length <=4){
+        $('.purchases__Basket').removeAttr('style');
+    }
+    else if (purchasesContainer.length >4){
+        $('.purchases__Basket').css({
+            'justify-content':'flex-start'
+        })
+    }
     
-    if (purchasesContainer == []){
+    if (purchasesContainer == ""){
         $('.purchases__Basket').html("");
         $('.purchases__Basket').append(`
             <p>No tienes movimientos registrados. Realiza una compra !</p>
@@ -202,7 +260,7 @@ $('.cardsMonth').on('click', function monthSelected(){
         $('.purchases__Basket').html("");
         for (const purch of purchasesContainer) {
             $('.purchases__Basket').append(`
-                <div class=cardsPurch>
+                <div class=cardsPurch style="display:none">
                     <div class="cardsPurch__Container">
                         <p class="cardsP">Monto: ${purch.monto}</p>
                         <p class="cardsP">Cuotas: ${purch.cuotas}</p>
@@ -213,8 +271,32 @@ $('.cardsMonth').on('click', function monthSelected(){
                     </div>
                 </div>
             `)
+            $('.cardsPurch').slideDown('slow');
         }
     }
+    $('.cardsPurch').on('click', function purchSelected(){
+        $('.cardsPurch').find('.remove').hide();
+        $(this).find('.remove').show();
+        let purchSection = $('.cardsPurch');
+        for (const card of purchSection ) {
+            $('.cardsPurch').removeAttr('style');
+            $('.cardsPurch').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+        }
+            
+        $(this).css({
+            'background':'var(--linksNav)',
+            'box-shadow':'0px 1px 5px var(--strongs)'
+        });
+        $(this).find('i').css({
+            'color':'var(--cardsBackground)'
+        }).hover(function(){
+            $(this).css({
+                'color':'var(--linksNavHover)'});
+            }, function(){
+                $(this).css({'color':'var(--cardsBackground'})
+        });
+    })
+
         /** Remove Cards Month **/
     $('.remove').unbind('click')
     $(this).find('.remove').on('click', function removeCardsMonth(){
@@ -236,40 +318,23 @@ $('.cardsMonth').on('click', function monthSelected(){
 
         monthsContainerLocal = JSON.stringify(monthsContainer);
         localStorage.setItem("arrayMonths", monthsContainerLocal);
+
+        if (monthsContainer.length <=3){
+            $('.months__Basket').removeAttr('style');
+        }
         
+        if (monthsContainer == ""){
+            $('.months__Basket').append(`
+                <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
+            `)
+        }
+
+        $('.purchases__Basket').removeAttr('style');
         $('.purchases__Basket').html("").append(`
             <p>Selecciona un mes y cargá tus compras !</p>
         `)
         cardSelection = undefined;
     })
-})
-
-    /** Remove Cards Month **/
-$('.remove').unbind('click')
-$(this).find('.remove').on('click', function removeCardsMonth(){
-    // $('.remove').on('click', function removeCardsMonth(){
-    console.log(i)
-    i++;
-    console.log(cardSelection)
-    $(this).parent().remove();
-
-    console.log(monthsContainer)
-    console.log(monthSelection)
-    let monthSelectionIndex = monthsContainer.indexOf(monthSelection);
-
-    console.log(monthSelectionIndex);
-
-    let temp = monthsContainer.splice(monthSelectionIndex,1)
-    console.log(monthsContainer)
-    console.log(temp)
-
-    monthsContainerLocal = JSON.stringify(monthsContainer);
-    localStorage.setItem("arrayMonths", monthsContainerLocal);
-    
-    $('.purchases__Basket').html("").append(`
-        <p>Selecciona un mes y cargá tus compras !</p>
-    `)
-    cardSelection = undefined;
 })
 
 
@@ -324,43 +389,75 @@ function cardsFactory() {
     }
     let lastNumbers = document.getElementById("lastNumbers").value;
 
+    if(cardsContainer.length == 0){
+        $('#cards__Basket').html("");
+    }
+
+    if(cardsContainer.length >= 2){
+        $('#cards__Basket').css({
+            'justify-content':'flex-start'
+        })
+    }
+
     cardsContainer.push(new Cards(name,lastname,lastNumbers));
 
     cardsContainerLocal = JSON.stringify(cardsContainer);
     localStorage.setItem("arrayCards", cardsContainerLocal);
 
-    $('#cards__Basket').html("");
-    for (const cards of cardsContainer) {
-        $('#cards__Basket').append(`
-            <div class="cardsUser">
+    $('#cards__Basket').append(`
+            <div class="cardsUser" style="display:none">
                 <div class="cardsUser__Edges">
                     <h3>Visa</h3>
                     <div class="remove" >
                         <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
                     </div>
                 </div>
-                <p>${cards.nombre} ${cards.apellido}</p>
-                <p>xxxx xxxx xxxx ${cards.lastNumbers}</p>
+                <p>${name} ${lastname}</p>
+                <p>xxxx xxxx xxxx ${lastNumbers}</p>
                 <div class="cardsUser__Edges">
                     <p>xx/xx</p>
                     <p>xxx</p>
                 </div>
             </div>
         `)
-    }
+    $('.cardsUser').slideDown("slow")
 
-    $('#cardSelector').html("");
+    setTimeout(function scrollCard (){
+        $('#cards__Basket').scrollTop($('#cards__Basket').height())
+    },620);
+
+    // let temp = this.document.getElementsByClassName("cardsUser")
+    // temp.scrollIntoView() **** Alt method - Js Vanilla - Only for Ids.
+
     $('#cardSelector').append(`
-            <option selected disabled>Seleccione su tarjeta</option>
+            <option>${name} ${lastname} - xxxx ${lastNumbers}</option>
     `)
-    for (const cards of cardsContainer) {
-        $('#cardSelector').append(`
-            <option>${cards.nombre} ${cards.apellido} - xxxx ${cards.lastNumbers}</option>
-    `)
-    }
     if (userType){
         $('.thirdParty').hide();
     }
+
+    $('.cardsUser').on('click', function cardUserSelected(){
+        $('.cardsUser').find('.remove').hide();
+        $(this).find('.remove').show();
+        let cardsSection = $('.cardsUser');
+        for (const card of cardsSection ) {
+            $('.cardsUser').removeAttr('style');
+            $('.cardsUser').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+        }
+        
+        $(this).css({
+            'background':'var(--linksNav)',
+            'box-shadow':'0px 1px 5px var(--strongs)'
+        });
+        $(this).find('i').css({
+            'color':'var(--cardsBackground)'
+        }).hover(function(){
+            $(this).css({
+                'color':'var(--linksNavHover)'});
+            }, function(){
+                $(this).css({'color':'var(--cardsBackground'})
+        });
+    })
 }
 
     /** Months Factory **/
@@ -371,28 +468,47 @@ $('#btnMonthsFac').on('click', function monthFactory(){
     let expiration = $('#expiration').val();
     const purchasesContainer = [];
 
+    if(monthsContainer.length == 0){
+        $('.months__Basket').html("");
+        console.log('entro')
+    }
+
+    if(monthsContainer.length >= 4){
+        console.log('entro por aca') 
+        $('.months__Basket').css({
+            'justify-content':'flex-start'
+        })
+    }
+
     monthsContainer.push(new Months(month, clousure, expiration, purchasesContainer));
     console.log(monthsContainer);
 
     monthsContainerLocal = JSON.stringify(monthsContainer);
     localStorage.setItem("arrayMonths", monthsContainerLocal);
 
-    $('.months__Basket').html("");
-    for (const months of monthsContainer) {
-        $('.months__Basket').append(`
-            <div class=cardsMonth id=${months.mes}>
+    $('.months__Basket').append(`
+            <div class=cardsMonth id=${month} style="display:none">
                 <div class="cardsMonth__Container">
-                    <p class="cardsP">Mes: ${months.mes}</p>
-                    <p class="cardsP">Cierre: ${months.fechaCierre}</p>
-                    <p class="cardsP">Vencimiento: ${months.fechaVencimiento}</p>
+                    <p class="cardsP">Mes: ${month}</p>
+                    <p class="cardsP">Cierre: ${clousure}</p>
+                    <p class="cardsP">Vencimiento: ${expiration}</p>
                 </div>
                 <div class="remove" >
                     <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
                 </div>
             </div>
         `)
-    }  
+    $('.cardsMonth').slideDown('fast');
 
+    setTimeout(function scrollCard (){
+        $('.months__Basket').scrollTop($('.months__Basket').height())
+    },620);
+
+    $('.cardsMonth').find('.remove').hide();
+    $('.cardsMonth').removeAttr('style');
+    $('.cardsMonth').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+
+    $('.purchases__Basket').removeAttr('style');
     $('.purchases__Basket').html("").append(`
         <p>Selecciona un mes y cargá tus compras !</p>
     `)
@@ -402,6 +518,8 @@ $('#btnMonthsFac').on('click', function monthFactory(){
 
         /** Months Selection **/
     $('.cardsMonth').on('click', function monthSelected(){
+        $('.cardsMonth').find('.remove').hide();
+        $(this).find('.remove').show();
         let cardsSection = $('.cardsMonth');
         for (const card of cardsSection ) {
             $('.cardsMonth').removeAttr('style');
@@ -413,12 +531,12 @@ $('#btnMonthsFac').on('click', function monthFactory(){
             'box-shadow':'0px 1px 5px var(--strongs)'
         });
         $(this).find('i').css({
-            'color':'var(--linksNavHover)'
+            'color':'var(--cardsBackground)'
         }).hover(function(){
             $(this).css({
-                'color':'var(--cardsBackground)'});
+                'color':'var(--linksNavHover)'});
             }, function(){
-                $(this).css({'color':'var(--linksNavHover'})
+                $(this).css({'color':'var(--cardsBackground'})
         });
         
 
@@ -429,8 +547,17 @@ $('#btnMonthsFac').on('click', function monthFactory(){
         // console.log(monthSelection);
         const purchasesContainer = monthSelection.compras;
         // console.log(purchasesContainer)
+
+        if (purchasesContainer.length <=4){
+            $('.purchases__Basket').removeAttr('style');
+        }
+        else if (purchasesContainer.length >4){
+            $('.purchases__Basket').css({
+                'justify-content':'flex-start'
+            })
+        }
         
-        if (purchasesContainer == []){
+        if (purchasesContainer == ""){
             $('.purchases__Basket').html("");
             $('.purchases__Basket').append(`
                 <p>No tienes movimientos registrados. Realiza una compra !</p>
@@ -440,7 +567,7 @@ $('#btnMonthsFac').on('click', function monthFactory(){
             $('.purchases__Basket').html("");
             for (const purch of purchasesContainer) {
                 $('.purchases__Basket').append(`
-                    <div class=cardsPurch>
+                    <div class=cardsPurch style="display:none">
                         <div class="cardsPurch__Container">
                             <p class="cardsP">Monto: ${purch.monto}</p>
                             <p class="cardsP">Cuotas: ${purch.cuotas}</p>
@@ -451,8 +578,33 @@ $('#btnMonthsFac').on('click', function monthFactory(){
                         </div>
                     </div>
                 `)
+                $('.cardsPurch').slideDown('slow');
             }
         }
+        $('.cardsPurch').on('click', function purchSelected(){
+            $('.cardsPurch').find('.remove').hide();
+            $(this).find('.remove').show();
+            let purchSection = $('.cardsPurch');
+            for (const card of purchSection ) {
+                $('.cardsPurch').removeAttr('style');
+                $('.cardsPurch').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+            }
+                
+            $(this).css({
+                'background':'var(--linksNav)',
+                'box-shadow':'0px 1px 5px var(--strongs)'
+            });
+            $(this).find('i').css({
+                'color':'var(--cardsBackground)'
+            }).hover(function(){
+                $(this).css({
+                    'color':'var(--linksNavHover)'});
+                }, function(){
+                    $(this).css({'color':'var(--cardsBackground'})
+            });
+        })
+
+
         /** Remove Cards Month **/
         $('.remove').unbind('click')
         $(this).find('.remove').on('click', function removeCardsMonth(){
@@ -474,7 +626,18 @@ $('#btnMonthsFac').on('click', function monthFactory(){
 
             monthsContainerLocal = JSON.stringify(monthsContainer);
             localStorage.setItem("arrayMonths", monthsContainerLocal);
+
+            if (monthsContainer.length <=3){
+                $('.months__Basket').removeAttr('style');
+            }
+
+            if (monthsContainer == ""){
+                $('.months__Basket').append(`
+                    <p>Ups ! Ni un mango por aquí, ni un manguito por allá.</p>
+                `)
+            }
             
+            $('.purchases__Basket').removeAttr('style');
             $('.purchases__Basket').html("").append(`
                 <p>Selecciona un mes y cargá tus compras !</p>
             `)
@@ -502,6 +665,18 @@ $('#btnPurchsFac').on('click', function purchFactory(){
         let payments = $('#payments').val();
         let cardSelector = $('#cardSelector').val();
 
+        if(purchasesContainer.length == 0){
+            console.log('entro')
+            $('.purchases__Basket').html("");
+        }
+
+        if(purchasesContainer.length >= 4){
+            console.log('entro por aca tmb')
+            $('.purchases__Basket').css({
+                'justify-content':'flex-start'
+            })
+        }
+
         purchasesContainer.push(new Purchases(amount, payments, cardSelector));
         console.log(purchasesContainer);
 
@@ -512,20 +687,45 @@ $('#btnPurchsFac').on('click', function purchFactory(){
         monthsContainerLocal = JSON.stringify(monthsContainer);
         localStorage.setItem("arrayMonths", monthsContainerLocal);
 
-        $('.purchases__Basket').html("");
-        for (const purch of purchasesContainer) {
-            $('.purchases__Basket').append(`
-                <div class=cardsPurch>
+        $('.purchases__Basket').append(`
+                <div class=cardsPurch style="display:none">
                     <div class="cardsPurch__Container">
-                        <p class="cardsP">Monto: ${purch.monto}</p>
-                        <p class="cardsP">Cuotas: ${purch.cuotas}</p>
-                        <p class="cardsP">Tarjeta: ${purch.tarjetas}</p>
+                        <p class="cardsP">Monto: ${amount}</p>
+                        <p class="cardsP">Cuotas: ${payments}</p>
+                        <p class="cardsP">Tarjeta: ${cardSelector}</p>
                     </div>
                     <div class="remove" >
                         <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
                     </div>
                 </div>
             `)
-        }
+        $('.cardsPurch').slideDown('slow');
+
+        setTimeout(function scrollCard (){
+            $('.purchases__Basket').scrollTop($('.purchases__Basket').height())
+        },620);
+
+        $('.cardsPurch').on('click', function purchSelected(){
+            $('.cardsPurch').find('.remove').hide();
+            $(this).find('.remove').show();
+            let purchSection = $('.cardsPurch');
+            for (const card of purchSection ) {
+                $('.cardsPurch').removeAttr('style');
+                $('.cardsPurch').find('i').removeAttr('style').unbind('mouseenter mouseleave');
+            }
+                
+            $(this).css({
+                'background':'var(--linksNav)',
+                'box-shadow':'0px 1px 5px var(--strongs)'
+            });
+            $(this).find('i').css({
+                'color':'var(--cardsBackground)'
+            }).hover(function(){
+                $(this).css({
+                    'color':'var(--linksNavHover)'});
+                }, function(){
+                    $(this).css({'color':'var(--cardsBackground'})
+            });
+        })
     } 
 })
